@@ -1,2 +1,3 @@
-# qc-pipelines
-components for quality control pipelines
+# Quality Control Pipelines
+
+Components for quality control pipelines.
