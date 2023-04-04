@@ -11,7 +11,7 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/picard:VERSION
 
-baseCommand: [picard, CollectAlignmentSummaryMetrics]
+baseCommand: [picard, CollectBaseDistributionByCycle]
 
 inputs:
   - id: input_file_bam
@@ -22,15 +22,6 @@ inputs:
       prefix: -I
     doc: Input file in BAM format with the corresponding index file
 
-  - id: genome_reference_fasta
-    type: File
-    secondaryFiles:
-      - ^.dict
-      - .fai
-    inputBinding:
-      prefix: -R
-    doc: Genome reference in FASTA format with the corresponding index files
-
   - id: output_file_name
     type: string
     default: "output.txt"
@@ -38,12 +29,23 @@ inputs:
       prefix: -O
     doc: Name for the output file in TXT format
 
+  - id: output_chart_name
+    type: string
+    default: "collect_base_dist_by_cycle.pdf"
+    inputBinding:
+      prefix: --CHART_OUTPUT
+    doc: Name for the output chart in PDF format
+
 outputs:
   - id: output_file_txt
     type: File
     outputBinding:
       glob: $(inputs.output_file_name)
 
+  - id: output_chart_pdf
+    type: File
+    outputBinding:
+      glob: $(inputs.output_chart_name)
+
 doc: |
-  Run picard CollectAlignmentSummaryMetrics command. |
-  Implementation for standard paired-end sequencing with read pairs in FR orientation
+  Run picard CollectBaseDistributionByCycle command
