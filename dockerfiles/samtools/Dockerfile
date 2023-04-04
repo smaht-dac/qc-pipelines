@@ -38,4 +38,9 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.17/samtools-1.
     cd .. && \
     ln -s samtools-1.17 samtools
 
+#######################################################################
+#     Updating env
+#######################################################################
+ENV PATH=/usr/local/bin/samtools/:$PATH
+
 CMD ["bash"]
