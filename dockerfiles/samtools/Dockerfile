@@ -10,7 +10,10 @@ MAINTAINER Michele Berselli (berselli.michele@gmail.com)
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
-    tabix
+    tabix \
+    libncurses-dev \
+    libbz2-dev \
+    liblzma-dev
 
 #######################################################################
 #     Setting env
