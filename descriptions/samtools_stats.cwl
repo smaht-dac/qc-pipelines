@@ -27,7 +27,7 @@ inputs:
     default: null
     inputBinding:
       position: 1
-      prefix: -@
+      prefix: --threads
     doc: Number of input/output compression threads to use in addition to main thread [0]
 
 outputs:
