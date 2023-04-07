@@ -29,6 +29,13 @@ inputs:
          Each thread will be allocated 250MB of memory.  |
          You should not run more than 6 threads on a 32 bit machine
 
+  - id: output_directory_name
+    type: string
+    default: "."
+    inputBinding:
+      position: 3
+    doc: Name for the output directory
+
 outputs:
   - id: output_report_zip
     type: File
