@@ -38,4 +38,11 @@ RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.
 #######################################################################
 ENV PATH=/usr/local/bin/FastQC/:$PATH
 
+#######################################################################
+#     Scripts
+#######################################################################
+## FastQC run
+COPY run.sh .
+RUN chmod +x run.sh
+
 CMD ["bash"]
