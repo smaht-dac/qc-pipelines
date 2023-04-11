@@ -3,15 +3,18 @@
 #######################################################################
 FROM smaht/ubuntu2204-py38:0.0.1
 
-MAINTAINER Michele Berselli (berselli.michele@gmail.com)
+LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Maziec (dominika_maziec@hms.harvard.edu)"
 
 #######################################################################
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
-    locales \
-    tabix \
-    libncurses-dev
+    locales=2.35-0ubuntu3.1 \
+    tabix=1.13+ds-2build1 \
+    libncurses-dev=6.3-2 \
+    --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 #######################################################################
 #     Setting env
@@ -29,9 +32,7 @@ ENV LC_ALL=en_US.UTF-8
 ## FastQC install
 RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.0.zip && \
     unzip fastqc_v0.12.0.zip && \
-    cd FastQC/ && \
-    chmod 755 fastqc && \
-    cd ..
+    chmod 755 FastQC/fastqc
 
 #######################################################################
 #     Updating env

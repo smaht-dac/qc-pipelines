@@ -3,14 +3,17 @@
 #######################################################################
 FROM smaht/ubuntu2204-py38:0.0.1
 
-MAINTAINER Michele Berselli (berselli.michele@gmail.com)
+LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Maziec (dominika_maziec@hms.harvard.edu)"
 
 #######################################################################
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
-    locales \
-    tabix
+    locales=2.35-0ubuntu3.1 \
+    tabix=1.13+ds-2build1 \
+    --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 #######################################################################
 #     Setting env
