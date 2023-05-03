@@ -1,0 +1,39 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: picard_CollectGcBiasMetrics
+description: Run Picard CollectGcBiasMetrics command
+
+runner:
+  language: cwl
+  main: picard_CollectGcBiasMetrics.cwl
+
+software:
+  - Picard@3.0.0
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file argument
+  input_file_bam:
+    argument_type: file.bam
+
+  genome_reference_fasta:
+    argument_type: file.fa
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt
+
+  output_summary_txt:
+    argument_type: file.txt
+
+  output_chart_pdf:
+    argument_type: file.pdf

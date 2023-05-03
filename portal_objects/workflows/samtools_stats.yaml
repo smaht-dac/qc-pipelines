@@ -1,0 +1,34 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: samtools_stats
+description: Run Samtools stats command
+
+runner:
+  language: cwl
+  main: samtools_stats.cwl
+
+software:
+  - Samtools@1.17
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt
