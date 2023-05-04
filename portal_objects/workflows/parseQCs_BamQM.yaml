@@ -1,0 +1,83 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: parseQCs_BamQM
+description: Run parseQCs to generate quality metrics. |
+             Implementation to generate metrics for a BAM file (BamQM)
+
+runner:
+  language: cwl
+  main: parseQCs_BamQM.cwl
+
+software:
+  - parseQCs@7620b3d
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+    # this file is actually not used by the code but is needed
+    #   to specify where the quality metrics object need to be linked
+
+  # Files to load
+  SAMTOOLS_stats_OUTPUT:
+    argument_type: file.txt
+
+  SAMTOOLS_flagstat_OUTPUT:
+    argument_type: file.txt
+
+  SAMTOOLS_idxstats_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectAlignmentSummaryMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectBaseDistributionByCycle_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectBaseDistributionByCycle_PDF:
+    argument_type: file.pdf
+
+  PICARD_CollectGcBiasMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectGcBiasMetrics_SUMMARY:
+    argument_type: file.txt
+
+  PICARD_CollectGcBiasMetrics_PDF:
+    argument_type: file.pdf
+
+  PICARD_CollectInsertSizeMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectInsertSizeMetrics_PDF:
+    argument_type: file.pdf
+
+  PICARD_CollectWgsMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_MeanQualityByCycle_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_MeanQualityByCycle_PDF:
+    argument_type: file.pdf
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # QC output
+  qc_values_json:
+    argument_type: qc.quality_metric_generic
+    argument_to_be_attached_to: input_file_bam
+    json: True
+
+  metrics_zip:
+    argument_type: qc.quality_metric_generic
+    argument_to_be_attached_to: input_file_bam
+    zipped: True
