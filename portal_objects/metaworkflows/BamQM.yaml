@@ -1,0 +1,513 @@
+## Pipeline information #####################################
+#     General information for the pipeline
+#############################################################
+name: BamQM
+description: Calculate BamQM quality metrics for input file in BAM format. |
+             Implementation for paired-end sequencing data
+
+## General arguments ########################################
+#     Pipeline input, reference files, and general arguments
+#       define all arguments for the pipeline here
+#############################################################
+input:
+
+  # File argument
+  input_bams:
+    argument_type: file.bam
+    dimensionality: 1
+
+  genome_reference_fasta:
+    argument_type: file.fa
+    files:
+      - complete-reference-fasta@hg38
+
+  # Parameter argument
+  nthreads:
+    argument_type: parameter.integer
+    value: "16"
+
+  read_length:
+    argument_type: parameter.integer
+    value: "150"
+
+## Workflows and dependencies ###############################
+#     Information for the workflows and their dependencies
+#############################################################
+workflows:
+
+  ## Workflow definition #####################
+  ############################################
+  samtools_stats:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+      # Optional parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: samtools stats output TXT
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_samtools_stats
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  samtools_flagstat:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+      # Optional parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: samtools flagstat output TXT
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_samtools_flagstat
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  samtools_idxstats:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: samtools idxstats output TXT
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: "1.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_samtools_idxstats
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_CollectAlignmentSummaryMetrics:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard CollectAlignmentSummaryMetrics output TXT
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_CollectAlignmentSummaryMetrics
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_CollectBaseDistributionByCycle:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard CollectBaseDistributionByCycle output TXT
+
+      output_chart_pdf:
+        argument_type: file.pdf
+        description: picard CollectBaseDistributionByCycle output PDF
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_CollectBaseDistributionByCycle
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_CollectGcBiasMetrics:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard CollectGcBiasMetrics output TXT
+
+      output_summary_txt:
+        argument_type: file.txt
+        description: picard CollectGcBiasMetrics summary TXT
+
+      output_chart_pdf:
+        argument_type: file.pdf
+        description: picard CollectGcBiasMetrics output PDF
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_CollectGcBiasMetrics
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_CollectInsertSizeMetrics:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard CollectInsertSizeMetrics output TXT
+
+      output_histogram_pdf:
+        argument_type: file.pdf
+        description: picard CollectInsertSizeMetrics output PDF
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_CollectInsertSizeMetrics
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_CollectWgsMetrics:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+      # Parameter argument
+      read_length:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard CollectWgsMetrics output TXT
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_CollectWgsMetrics
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  picard_MeanQualityByCycle:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # Required file arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        argument_type: file.txt
+        description: picard MeanQualityByCycle output TXT
+
+      output_chart_pdf:
+        argument_type: file.pdf
+        description: picard MeanQualityByCycle output PDF
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.4xlarge
+        - m5.4xlarge
+        - m6i.4xlarge
+        - m6a.4xlarge
+      ebs_size: "2.1x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_picard_MeanQualityByCycle
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  parseQCs_BamQM:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File argument
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_bams
+        input_dimension: 1
+        # this file is actually not used by the code but is needed
+        #   to specify where the quality metrics object need to be linked
+
+      # Files to load
+      SAMTOOLS_stats_OUTPUT:
+        argument_type: file.txt
+        source: samtools_stats
+        source_argument_name: output_file_txt
+
+      SAMTOOLS_flagstat_OUTPUT:
+        argument_type: file.txt
+        source: samtools_flagstat
+        source_argument_name: output_file_txt
+
+      SAMTOOLS_idxstats_OUTPUT:
+        argument_type: file.txt
+        source: samtools_idxstats
+        source_argument_name: output_file_txt
+
+      PICARD_CollectAlignmentSummaryMetrics_OUTPUT:
+        argument_type: file.txt
+        source: picard_CollectAlignmentSummaryMetrics
+        source_argument_name: output_file_txt
+
+      PICARD_CollectBaseDistributionByCycle_OUTPUT:
+        argument_type: file.txt
+        source: picard_CollectBaseDistributionByCycle
+        source_argument_name: output_file_txt
+
+      PICARD_CollectBaseDistributionByCycle_PDF:
+        argument_type: file.pdf
+        source: picard_CollectBaseDistributionByCycle
+        source_argument_name: output_chart_pdf
+
+      PICARD_CollectGcBiasMetrics_OUTPUT:
+        argument_type: file.txt
+        source: picard_CollectGcBiasMetrics
+        source_argument_name: output_file_txt
+
+      PICARD_CollectGcBiasMetrics_SUMMARY:
+        argument_type: file.txt
+        source: picard_CollectGcBiasMetrics
+        source_argument_name: output_summary_txt
+
+      PICARD_CollectGcBiasMetrics_PDF:
+        argument_type: file.pdf
+        source: picard_CollectGcBiasMetrics
+        source_argument_name: output_chart_pdf
+
+      PICARD_CollectInsertSizeMetrics_OUTPUT:
+        argument_type: file.txt
+        source: picard_CollectInsertSizeMetrics
+        source_argument_name: output_file_txt
+
+      PICARD_CollectInsertSizeMetrics_PDF:
+        argument_type: file.pdf
+        source: picard_CollectInsertSizeMetrics
+        source_argument_name: output_histogram_pdf
+
+      PICARD_CollectWgsMetrics_OUTPUT:
+        argument_type: file.txt
+        source: picard_CollectWgsMetrics
+        source_argument_name: output_file_txt
+
+      PICARD_MeanQualityByCycle_OUTPUT:
+        argument_type: file.txt
+        source: picard_MeanQualityByCycle
+        source_argument_name: output_file_txt
+
+      PICARD_MeanQualityByCycle_PDF:
+        argument_type: file.pdf
+        source: picard_MeanQualityByCycle
+        source_argument_name: output_chart_pdf
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type: t3.small
+      ebs_size: "1.5x"
+      EBS_optimized: True
+      spot_instance: True
+      run_name: run_parseQCs_BamQM
+      behavior_on_capacity_limit: wait_and_retry
