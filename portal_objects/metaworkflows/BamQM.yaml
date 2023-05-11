@@ -43,18 +43,17 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
-      # Optional parameter arguments
+      # Parameter arguments
       nthreads:
         argument_type: parameter.integer
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -85,18 +84,17 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
-      # Optional parameter arguments
+      # Parameter arguments
       nthreads:
         argument_type: parameter.integer
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -127,14 +125,13 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -162,7 +159,7 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
@@ -172,7 +169,6 @@ workflows:
         argument_type: file.fa
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -203,14 +199,13 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -245,7 +240,7 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
@@ -255,7 +250,6 @@ workflows:
         argument_type: file.fa
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -294,14 +288,13 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -336,7 +329,7 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
@@ -345,12 +338,11 @@ workflows:
       genome_reference_fasta:
         argument_type: file.fa
 
-      # Parameter argument
+      # Parameter arguments
       read_length:
         argument_type: parameter.integer
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -381,14 +373,13 @@ workflows:
     ####################################
     input:
 
-      # Required file arguments
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
 
     ## Output ##########################
-    #     Output files for the workflow
     ####################################
     output:
 
@@ -423,7 +414,7 @@ workflows:
     ####################################
     input:
 
-      # File argument
+      # File arguments
       input_file_bam:
         argument_type: file.bam
         source_argument_name: input_bams
@@ -431,7 +422,6 @@ workflows:
         # this file is actually not used by the code but is needed
         #   to specify where the quality metrics object need to be linked
 
-      # Files to load
       SAMTOOLS_stats_OUTPUT:
         argument_type: file.txt
         source: samtools_stats
