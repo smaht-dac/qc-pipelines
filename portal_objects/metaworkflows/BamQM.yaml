@@ -59,7 +59,6 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: samtools stats output TXT
 
     ## EC2 Configuration to use ########
@@ -100,7 +99,6 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: samtools flagstat output TXT
 
     ## EC2 Configuration to use ########
@@ -137,7 +135,6 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: samtools idxstats output TXT
 
     ## EC2 Configuration to use ########
@@ -174,7 +171,6 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard CollectAlignmentSummaryMetrics output TXT
 
     ## EC2 Configuration to use ########
@@ -211,11 +207,9 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard CollectBaseDistributionByCycle output TXT
 
       output_chart_pdf:
-        argument_type: file.pdf
         file_type: picard CollectBaseDistributionByCycle output PDF
 
     ## EC2 Configuration to use ########
@@ -255,15 +249,12 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard CollectGcBiasMetrics output TXT
 
       output_summary_txt:
-        argument_type: file.txt
         file_type: picard CollectGcBiasMetrics summary TXT
 
       output_chart_pdf:
-        argument_type: file.pdf
         file_type: picard CollectGcBiasMetrics output PDF
 
     ## EC2 Configuration to use ########
@@ -300,11 +291,9 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard CollectInsertSizeMetrics output TXT
 
       output_histogram_pdf:
-        argument_type: file.pdf
         file_type: picard CollectInsertSizeMetrics output PDF
 
     ## EC2 Configuration to use ########
@@ -348,7 +337,6 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard CollectWgsMetrics output TXT
 
     ## EC2 Configuration to use ########
@@ -385,11 +373,9 @@ workflows:
 
       # File output
       output_file_txt:
-        argument_type: file.txt
         file_type: picard MeanQualityByCycle output TXT
 
       output_chart_pdf:
-        argument_type: file.pdf
         file_type: picard MeanQualityByCycle output PDF
 
     ## EC2 Configuration to use ########
