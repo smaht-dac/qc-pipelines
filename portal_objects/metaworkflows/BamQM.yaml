@@ -405,6 +405,7 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_bams
         input_dimension: 1
+        mount: True
         # this file is actually not used by the code but is needed
         #   to specify where the quality metrics object need to be linked
 
