@@ -2,8 +2,8 @@
 #     General information for the pipeline
 #############################################################
 name: BamQM
-description: Calculate BamQM quality metrics for input file in BAM format. |
-             Implementation for paired-end sequencing data
+description: Calculate BamQM quality metrics for input files in BAM format. |
+             Implementation for paired-end short reads data
 
 ## General arguments ########################################
 #     Pipeline input, reference files, and general arguments
@@ -12,7 +12,7 @@ description: Calculate BamQM quality metrics for input file in BAM format. |
 input:
 
   # File argument
-  input_bams:
+  input_files_bam:
     argument_type: file.bam
     dimensionality: 1
 
@@ -46,8 +46,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
       # Parameter arguments
       nthreads:
@@ -86,8 +86,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
       # Parameter arguments
       nthreads:
@@ -126,8 +126,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
     ## Output ##########################
     ####################################
@@ -159,8 +159,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
       genome_reference_fasta:
         argument_type: file.fa
@@ -198,8 +198,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
     ## Output ##########################
     ####################################
@@ -237,8 +237,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
       genome_reference_fasta:
         argument_type: file.fa
@@ -282,8 +282,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
     ## Output ##########################
     ####################################
@@ -321,8 +321,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
       genome_reference_fasta:
         argument_type: file.fa
@@ -364,8 +364,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
-        input_dimension: 1
+        source_argument_name: input_files_bam
+        scatter: 1
 
     ## Output ##########################
     ####################################
@@ -403,7 +403,7 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_bams
+        source_argument_name: input_files_bam
         input_dimension: 1
         mount: True
         # this file is actually not used by the code but is needed

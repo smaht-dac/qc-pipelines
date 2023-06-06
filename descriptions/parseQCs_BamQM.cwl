@@ -41,7 +41,7 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/parseqc:VERSION
 
-baseCommand: ['parseQCs.py']
+baseCommand: [parseQCs.py]
 
 inputs:
   # Input arguments
