@@ -16,11 +16,9 @@ baseCommand: [picard, CollectInsertSizeMetrics]
 inputs:
   - id: input_file_bam
     type: File
-    secondaryFiles:
-      - .bai
     inputBinding:
       prefix: -I
-    doc: Input file in BAM format with the corresponding index file
+    doc: Input file in BAM format
 
   - id: output_file_name
     type: string

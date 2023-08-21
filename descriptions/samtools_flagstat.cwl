@@ -16,11 +16,9 @@ baseCommand: [samtools, flagstat]
 inputs:
   - id: input_file_bam
     type: File
-    secondaryFiles:
-      - .bai
     inputBinding:
       position: 2
-    doc: Input file in BAM format with the corresponding index file
+    doc: Input file in BAM format
 
   - id: nthreads
     type: int

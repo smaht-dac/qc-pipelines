@@ -19,7 +19,7 @@ input:
   genome_reference_fasta:
     argument_type: file.fa
     files:
-      - complete-reference-fasta@hg38
+      - complete-reference-fasta-no-alt@GCA_000001405.15_GRCh38_no_decoy
 
   # Parameter argument
   nthreads:
