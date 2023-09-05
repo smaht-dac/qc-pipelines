@@ -13,6 +13,8 @@ hints:
 
 baseCommand: [picard, CollectWgsMetrics]
 
+arguments: [-Xmx32g]
+
 inputs:
   - id: input_file_bam
     type: File

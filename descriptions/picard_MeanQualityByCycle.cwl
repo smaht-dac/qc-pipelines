@@ -13,6 +13,8 @@ hints:
 
 baseCommand: [picard, MeanQualityByCycle]
 
+arguments: [-Xmx32g]
+
 inputs:
   - id: input_file_bam
     type: File

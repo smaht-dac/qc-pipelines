@@ -13,6 +13,8 @@ hints:
 
 baseCommand: [picard, CollectAlignmentSummaryMetrics]
 
+arguments: [-Xmx32g]
+
 inputs:
   - id: input_file_bam
     type: File
