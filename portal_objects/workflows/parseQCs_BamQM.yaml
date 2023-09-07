@@ -10,7 +10,7 @@ runner:
   main: parseQCs_BamQM.cwl
 
 software:
-  - parseQCs@7c4dbc2
+  - parseQCs@725318a
 
 ## Input information ########################################
 #     Input files and parameters

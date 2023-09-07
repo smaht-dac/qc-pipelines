@@ -34,7 +34,7 @@ RUN git clone https://github.com/smaht-dac/pipelines-scripts.git
 
 WORKDIR pipelines-scripts
 
-RUN git checkout 7c4dbc2 && \
+RUN git checkout 725318a && \
     chmod +x qc-scripts/parseQCs.py
 
 WORKDIR /usr/local/bin/
