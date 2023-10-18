@@ -10,7 +10,6 @@ LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Mazie
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
-    tabix=1.13+ds-2build1 \
     libncurses-dev=6.3-2 \
     --no-install-recommends \
     && apt-get clean \
