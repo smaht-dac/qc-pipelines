@@ -1,0 +1,34 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: bamstats
+description: Run bamstats.py script
+
+runner:
+  language: cwl
+  main: bamstats.cwl
+
+software:
+  - Samtools@1.17
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_bam:
+    argument_type: file.bam
+
+  # Optional parameter arguments
+  genome_size:
+    argument_type: parameter.integer
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  out:
+    argument_type: file.txt
