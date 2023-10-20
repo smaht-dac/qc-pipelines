@@ -1,7 +1,7 @@
 #######################################################################
 #     Basic image
 #######################################################################
-FROM smaht/ubuntu2204-py38:0.0.1
+FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py38:0.0.1
 
 LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Berselli (berselli.michele@gmail.com)"
 
@@ -9,7 +9,7 @@ LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Bers
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
-    locales=2.35-0ubuntu3.1 \
+    locales \
     tabix=1.13+ds-2build1 \
     gzip \
     libncurses-dev=6.3-2 \

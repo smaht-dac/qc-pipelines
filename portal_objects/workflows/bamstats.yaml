@@ -2,7 +2,7 @@
 #     General information for the workflow
 #############################################################
 name: bamstats
-description: Run bamstats.py script
+description: Run bamStats.py script to calculate quality metrics for input file in BAM format
 
 runner:
   language: cwl
@@ -17,11 +17,11 @@ software:
 input:
 
   # Required file arguments
-  input_bam:
+  input_file_bam:
     argument_type: file.bam
 
   # Optional parameter arguments
-  genome_size:
+  effective_genome_size:
     argument_type: parameter.integer
 
 ## Output information #######################################
@@ -30,5 +30,5 @@ input:
 output:
 
   # File output
-  out:
+  output_file_txt:
     argument_type: file.txt

@@ -31,7 +31,7 @@ input:
     value: "150"
 
   # TODO
-  #qc_rulset:
+  # qc_ruleset:
     
 
 ## Workflows and dependencies ###############################

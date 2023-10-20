@@ -29,9 +29,7 @@ ENV LC_ALL=en_US.UTF-8
 #     Software
 #######################################################################
 
-WORKDIR /usr/local/bin/
-
-## Python dependencies
+## Install qc-parser
 RUN pip install qc-parser
 
 

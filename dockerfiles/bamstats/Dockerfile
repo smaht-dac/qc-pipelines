@@ -1,7 +1,7 @@
 #######################################################################
 #     Basic image
 #######################################################################
-FROM smaht/ubuntu2204-py38:0.0.1
+FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py38:0.0.1
 
 LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Berselli (berselli.michele@gmail.com)"
 
@@ -9,7 +9,7 @@ LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Bers
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
-    locales=2.35-0ubuntu3.1 \
+    locales \
     tabix=1.13+ds-2build1 \
     libncurses-dev=6.3-2 \
     libbz2-dev=1.0.8-5build1 \
@@ -58,7 +58,5 @@ ENV PATH=/usr/local/bin/samtools/:$PATH
 #######################################################################
 
 COPY bamStats.py .
-COPY run.sh .
-RUN chmod +x run.sh
 
 CMD ["bash"]

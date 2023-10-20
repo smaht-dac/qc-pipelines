@@ -62,8 +62,9 @@ WQT = 10  # default quality threshold
 @click.option(
     "-o",
     "--out",
-    required=True,
+    required=False,
     type=str,
+    default="out.txt",
     help="Output file that contains the JSON encoded results",
 )
 def main(bam, quality, chip, second, gsize, print_result, out):

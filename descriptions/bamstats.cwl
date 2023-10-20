@@ -11,23 +11,23 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/bamstats:VERSION
 
-baseCommand: [run.sh]
+baseCommand: [python bamStats.py]
 
 inputs:
-  - id: input_bam
+  - id: input_file_bam
     type: File
     inputBinding:
-      position: 1
+      prefix: -b
     doc: Input file in BAM format
 
-  - id: genome_size
+  - id: effective_genome_size
     type: int
     inputBinding:
-      position: 2
-    doc: Genome size used to calculate coverage
+      prefix: -g
+    doc: Effective genome size used to calculate coverage
 
 outputs:
-  - id: out
+  - id: output_file_txt
     type: File
     outputBinding:
       glob: "out.txt"

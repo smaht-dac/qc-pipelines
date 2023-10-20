@@ -45,7 +45,7 @@ baseCommand: ["parse-qc"]
 
 inputs:
   # Input arguments
-  - id: qmtype
+  - id: qm_name
     type: string
     default: 'BAM Quality Metrics'
     inputBinding:
@@ -55,7 +55,7 @@ inputs:
   # Files to load
   - id: SAMTOOLS_stats_OUTPUT
     inputBinding:
-      prefix: "--metrics samtools"
+      prefix: "--metrics samtools_stats"
     type: File
 
   - id: PICARD_CollectAlignmentSummaryMetrics_OUTPUT
@@ -135,4 +135,4 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate BamQM quality metrics
+    Run parse-qc to generate BAM quality metrics
