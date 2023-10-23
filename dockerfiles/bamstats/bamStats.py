@@ -122,7 +122,7 @@ def main(bam, quality, chip, second, gsize, print_result, out):
     proc = subprocess.Popen('samtools view '+bam,
                             shell=True,
                             stdout=subprocess.PIPE)
-    
+
     for line_bytes in proc.stdout:
         line = str(line_bytes, encoding='utf-8')
         linep=line.split("\t")
@@ -184,7 +184,7 @@ def main(bam, quality, chip, second, gsize, print_result, out):
                 WnUnambThresh+=1
 
             #Count the mismatches in the unique alignments
-            if(mapScore>0):   
+            if(mapScore>0):
                 if(m0.search(line) or m0s.search(line)):
                     nUnAmb0+=1
                 if(m1.search(line) or m1s.search(line)):
@@ -270,12 +270,11 @@ def main(bam, quality, chip, second, gsize, print_result, out):
     if(print_result):
         print(json.dumps(result, indent=2))
 
-    
+
     # Save it to file
     with open(out, "w") as outfile:
         result_enc = json.dumps(result, indent=4)
         outfile.write(result_enc)
-
 
 
 if __name__ == "__main__":

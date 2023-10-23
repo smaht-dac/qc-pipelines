@@ -1,7 +1,7 @@
 ## Pipeline information #####################################
 #     General information for the pipeline
 #############################################################
-name: paired-end_short_reads_BAM_quality_metrics
+name: paired-end_short_reads_BAM_quality_metrics_GRCh38
 description: Calculate quality metrics for input files in BAM format. |
              Implementation for paired-end short reads data
 
@@ -353,7 +353,7 @@ workflows:
         - m6a.4xlarge
       ebs_size: "2.1x"
       EBS_optimized: True
-      spot_instance: True
+      spot_instance: False
       run_name: run_picard_CollectWgsMetrics
       behavior_on_capacity_limit: wait_and_retry
 
