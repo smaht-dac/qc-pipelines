@@ -11,7 +11,7 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/bamstats:VERSION
 
-baseCommand: [python bamStats.py]
+baseCommand: [python, bamStats.py]
 
 inputs:
   - id: input_file_bam
@@ -31,7 +31,6 @@ outputs:
     type: File
     outputBinding:
       glob: "out.txt"
-
 
 doc: |
   Run bamStats script

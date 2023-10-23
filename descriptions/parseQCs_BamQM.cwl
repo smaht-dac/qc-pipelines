@@ -41,7 +41,7 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/parseqc:VERSION
 
-baseCommand: ["parse-qc"]
+baseCommand: [parse-qc]
 
 inputs:
   # Input arguments
