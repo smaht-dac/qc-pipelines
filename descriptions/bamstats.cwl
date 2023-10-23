@@ -33,4 +33,4 @@ outputs:
       glob: "out.txt"
 
 doc: |
-  Run bamStats script
+  Run bamStats.py script

@@ -54,74 +54,74 @@ inputs:
 
   # Files to load
   - id: SAMTOOLS_stats_OUTPUT
+    type: File
     inputBinding:
       prefix: "--metrics samtools_stats"
-    type: File
 
   - id: PICARD_CollectAlignmentSummaryMetrics_OUTPUT
+    type: File
     inputBinding:
       prefix: "--metrics picard_CollectAlignmentSummaryMetrics"
-    type: File
 
   - id: PICARD_CollectInsertSizeMetrics_OUTPUT
+    type: File
     inputBinding:
       prefix: "--metrics picard_CollectInsertSizeMetrics"
-    type: File
 
   - id: PICARD_CollectWgsMetrics_OUTPUT
+    type: File
     inputBinding:
       prefix: "--metrics picard_CollectWgsMetrics"
-    type: File
 
   - id: SAMTOOLS_flagstat_OUTPUT
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: SAMTOOLS_idxstats_OUTPUT
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectBaseDistributionByCycle_PDF
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectGcBiasMetrics_OUTPUT
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectGcBiasMetrics_SUMMARY
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectGcBiasMetrics_PDF
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_CollectInsertSizeMetrics_PDF
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_MeanQualityByCycle_OUTPUT
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
   - id: PICARD_MeanQualityByCycle_PDF
+    type: File
     inputBinding:
       prefix: --additional-files
-    type: File
 
 outputs:
   - id: qc_values_json
@@ -135,4 +135,4 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate BAM quality metrics
+    Run parse-qc to generate quality metrics for input BAM file

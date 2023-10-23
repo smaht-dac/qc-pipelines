@@ -1,8 +1,8 @@
 ## Pipeline information #####################################
 #     General information for the pipeline
 #############################################################
-name: BamQM
-description: Calculate BamQM quality metrics for input files in BAM format. |
+name: paired-end_short_reads_BAM_quality_metrics
+description: Calculate quality metrics for input files in BAM format. |
              Implementation for paired-end short reads data
 
 ## General arguments ########################################
@@ -32,7 +32,7 @@ input:
 
   # TODO
   # qc_ruleset:
-    
+
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
@@ -398,7 +398,7 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  parseQCs_BamQM:
+  parse-qc_BAM_Quality_Metrics:
 
     ## Specific arguments ##############
     ####################################
@@ -490,5 +490,5 @@ workflows:
       ebs_size: "1.5x"
       EBS_optimized: True
       spot_instance: True
-      run_name: run_parseQCs_BamQM
+      run_name: run_parse-qc_BAM_Quality_Metrics
       behavior_on_capacity_limit: wait_and_retry

@@ -1,16 +1,16 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: parseQCs_BamQM
-description: Run parseQCs to generate quality metrics. |
-             Implementation to generate metrics for a BAM file (BamQM)
+name: parse-qc_BAM_Quality_Metrics
+description: Run parse-qc to generate quality metrics. |
+             Implementation to generate metrics for a BAM file
 
 runner:
   language: cwl
-  main: parseQCs_BamQM.cwl
+  main: parse-qc_BAM_Quality_Metrics.cwl
 
 software:
-  - parseQCs@725318a
+  - qc-parser@in_dev
 
 ## Input information ########################################
 #     Input files and parameters
