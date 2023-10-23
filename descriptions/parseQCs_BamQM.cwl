@@ -41,58 +41,86 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/parseqc:VERSION
 
-baseCommand: [parseQCs.py]
+baseCommand: [parse-qc]
 
 inputs:
   # Input arguments
-  - id: qmtype
+  - id: qm_name
     type: string
-    default: 'BamQM'
+    default: 'BAM Quality Metrics'
     inputBinding:
-      prefix: --qmtype
-    doc: Type of quality metrics to generate
+      prefix: --qm-name
+    doc: Name of the Quality Metric
 
   # Files to load
   - id: SAMTOOLS_stats_OUTPUT
-    type: File
-
-  - id: SAMTOOLS_flagstat_OUTPUT
-    type: File
-
-  - id: SAMTOOLS_idxstats_OUTPUT
+    inputBinding:
+      prefix: "--metrics samtools_stats"
     type: File
 
   - id: PICARD_CollectAlignmentSummaryMetrics_OUTPUT
-    type: File
-
-  - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
-    type: File
-
-  - id: PICARD_CollectBaseDistributionByCycle_PDF
-    type: File
-
-  - id: PICARD_CollectGcBiasMetrics_OUTPUT
-    type: File
-
-  - id: PICARD_CollectGcBiasMetrics_SUMMARY
-    type: File
-
-  - id: PICARD_CollectGcBiasMetrics_PDF
+    inputBinding:
+      prefix: "--metrics picard_CollectAlignmentSummaryMetrics"
     type: File
 
   - id: PICARD_CollectInsertSizeMetrics_OUTPUT
-    type: File
-
-  - id: PICARD_CollectInsertSizeMetrics_PDF
+    inputBinding:
+      prefix: "--metrics picard_CollectInsertSizeMetrics"
     type: File
 
   - id: PICARD_CollectWgsMetrics_OUTPUT
+    inputBinding:
+      prefix: "--metrics picard_CollectWgsMetrics"
+    type: File
+
+  - id: SAMTOOLS_flagstat_OUTPUT
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: SAMTOOLS_idxstats_OUTPUT
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectBaseDistributionByCycle_PDF
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectGcBiasMetrics_OUTPUT
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectGcBiasMetrics_SUMMARY
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectGcBiasMetrics_PDF
+    inputBinding:
+      prefix: --additional-files
+    type: File
+
+  - id: PICARD_CollectInsertSizeMetrics_PDF
+    inputBinding:
+      prefix: --additional-files
     type: File
 
   - id: PICARD_MeanQualityByCycle_OUTPUT
+    inputBinding:
+      prefix: --additional-files
     type: File
 
   - id: PICARD_MeanQualityByCycle_PDF
+    inputBinding:
+      prefix: --additional-files
     type: File
 
 outputs:
@@ -107,4 +135,4 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parseQCs.py to generate BamQM quality metrics
+    Run parse-qc to generate BAM quality metrics
