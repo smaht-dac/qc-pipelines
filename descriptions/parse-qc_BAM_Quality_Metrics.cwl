@@ -47,7 +47,7 @@ inputs:
   # Input arguments
   - id: qm_name
     type: string
-    default: 'BAM Quality Metrics'
+    default: "BAM Quality Metrics"
     inputBinding:
       prefix: --qm-name
     doc: Name of the Quality Metric

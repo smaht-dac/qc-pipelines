@@ -23,7 +23,7 @@ inputs:
   # Input arguments
   - id: qm_name
     type: string
-    default: 'FastQC Quality Metrics'
+    default: "FastQC Quality Metrics"
     inputBinding:
       prefix: --qm-name
     doc: Name of the Quality Metric
