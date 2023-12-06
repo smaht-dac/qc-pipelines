@@ -12,6 +12,9 @@ runner:
 software:
   - qc-parser@in_dev
 
+category:
+  - Quality Control
+
 ## Input information ########################################
 #     Input files and parameters
 #############################################################

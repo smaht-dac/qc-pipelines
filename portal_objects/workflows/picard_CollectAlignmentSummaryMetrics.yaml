@@ -12,6 +12,9 @@ runner:
 software:
   - Picard@3.0.0
 
+category:
+  - Quality Control
+
 ## Input information ########################################
 #     Input files and parameters
 #############################################################

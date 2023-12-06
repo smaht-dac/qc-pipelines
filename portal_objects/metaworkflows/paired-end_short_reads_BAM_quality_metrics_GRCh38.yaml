@@ -5,6 +5,9 @@ name: paired-end_short_reads_BAM_quality_metrics_GRCh38
 description: Calculate quality metrics for input files in BAM format. |
              Implementation for paired-end short reads data
 
+category:
+  - Quality Control
+
 ## General arguments ########################################
 #     Pipeline input, reference files, and general arguments
 #       define all arguments for the pipeline here
@@ -24,15 +27,14 @@ input:
   # Parameter argument
   nthreads:
     argument_type: parameter.integer
-    value: "16"
+    value: 16
 
   read_length:
     argument_type: parameter.integer
-    value: "150"
+    value: 150
 
   # TODO
   # qc_ruleset:
-
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
@@ -63,7 +65,11 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: samtools stats output TXT
+        description: samtools stats output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
     ## EC2 Configuration to use ########
     ####################################
@@ -73,7 +79,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_samtools_stats
@@ -103,7 +109,11 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: samtools flagstat output TXT
+        description: samtools flagstat output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
     ## EC2 Configuration to use ########
     ####################################
@@ -113,7 +123,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_samtools_flagstat
@@ -139,7 +149,11 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: samtools idxstats output TXT
+        description: samtools idxstats output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
     ## EC2 Configuration to use ########
     ####################################
@@ -175,7 +189,11 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard CollectAlignmentSummaryMetrics output TXT
+        description: picard CollectAlignmentSummaryMetrics output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
     ## EC2 Configuration to use ########
     ####################################
@@ -185,7 +203,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_picard_CollectAlignmentSummaryMetrics
@@ -211,10 +229,18 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard CollectBaseDistributionByCycle output TXT
+        description: picard CollectBaseDistributionByCycle output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
       output_chart_pdf:
-        file_type: picard CollectBaseDistributionByCycle output PDF
+        description: picard CollectBaseDistributionByCycle output PDF
+        data_category:
+          - Quality Control
+        data_type:
+          - Image
 
     ## EC2 Configuration to use ########
     ####################################
@@ -224,7 +250,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_picard_CollectBaseDistributionByCycle
@@ -253,13 +279,25 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard CollectGcBiasMetrics output TXT
+        description: picard CollectGcBiasMetrics output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
       output_summary_txt:
-        file_type: picard CollectGcBiasMetrics summary TXT
+        description: picard CollectGcBiasMetrics summary TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
       output_chart_pdf:
-        file_type: picard CollectGcBiasMetrics output PDF
+        description: picard CollectGcBiasMetrics output PDF
+        data_category:
+          - Quality Control
+        data_type:
+          - Image
 
     ## EC2 Configuration to use ########
     ####################################
@@ -269,7 +307,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_picard_CollectGcBiasMetrics
@@ -295,10 +333,18 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard CollectInsertSizeMetrics output TXT
+        description: picard CollectInsertSizeMetrics output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
       output_histogram_pdf:
-        file_type: picard CollectInsertSizeMetrics output PDF
+        description: picard CollectInsertSizeMetrics output PDF
+        data_category:
+          - Quality Control
+        data_type:
+          - Image
 
     ## EC2 Configuration to use ########
     ####################################
@@ -308,7 +354,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_picard_CollectInsertSizeMetrics
@@ -341,7 +387,11 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard CollectWgsMetrics output TXT
+        description: picard CollectWgsMetrics output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
     ## EC2 Configuration to use ########
     ####################################
@@ -351,7 +401,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: False
       run_name: run_picard_CollectWgsMetrics
@@ -377,10 +427,18 @@ workflows:
 
       # File output
       output_file_txt:
-        file_type: picard MeanQualityByCycle output TXT
+        description: picard MeanQualityByCycle output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
 
       output_chart_pdf:
-        file_type: picard MeanQualityByCycle output PDF
+        description: picard MeanQualityByCycle output PDF
+        data_category:
+          - Quality Control
+        data_type:
+          - Image
 
     ## EC2 Configuration to use ########
     ####################################
@@ -390,7 +448,7 @@ workflows:
         - m5.4xlarge
         - m6i.4xlarge
         - m6a.4xlarge
-      ebs_size: "2.1x"
+      ebs_size: "1.1x"
       EBS_optimized: True
       spot_instance: True
       run_name: run_picard_MeanQualityByCycle
@@ -486,8 +544,9 @@ workflows:
     ## EC2 Configuration to use ########
     ####################################
     config:
-      instance_type: t3.small
-      ebs_size: "1.5x"
+      instance_type:
+        - t3.small
+      ebs_size: 10
       EBS_optimized: True
       spot_instance: True
       run_name: run_parse-qc_BAM_Quality_Metrics

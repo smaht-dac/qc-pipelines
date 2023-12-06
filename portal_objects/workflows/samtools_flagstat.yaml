@@ -11,6 +11,9 @@ runner:
 software:
   - Samtools@1.17
 
+category:
+  - Quality Control
+
 ## Input information ########################################
 #     Input files and parameters
 #############################################################

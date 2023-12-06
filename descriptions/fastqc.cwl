@@ -14,11 +14,11 @@ hints:
 baseCommand: [run.sh]
 
 inputs:
-  - id: input_file_fastq
+  - id: input_file_fastq_gz
     type: File
     inputBinding:
       position: 1
-    doc: Input file in FASTQ format
+    doc: Input file in compressed FASTQ format
 
   - id: nthreads
     type: int
@@ -29,18 +29,16 @@ inputs:
          Each thread will be allocated 250MB of memory.  |
          You should not run more than 6 threads on a 32 bit machine
 
-  - id: output_directory_name
-    type: string
-    default: "."
-    inputBinding:
-      position: 3
-    doc: Name for the output directory
-
 outputs:
   - id: output_report_zip
     type: File
     outputBinding:
       glob: "*_fastqc.zip"
+
+  - id: output_summary_txt
+    type: File
+    outputBinding:
+      glob: "summary.txt"
 
 doc: |
   Run FastQC on files in FASTQ format

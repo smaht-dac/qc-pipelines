@@ -1,15 +1,15 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: bamstats
-description: Run bamStats.py script to calculate quality metrics for input file in BAM format
+name: fastqc
+description: Run FastQC on input file in FASTQ format
 
 runner:
   language: cwl
-  main: bamstats.cwl
+  main: fastqc.cwl
 
 software:
-  - Samtools@1.17
+  - FastQC@v0.12.0
 
 category:
   - Quality Control
@@ -19,12 +19,12 @@ category:
 #############################################################
 input:
 
-  # Required file arguments
-  input_file_bam:
-    argument_type: file.bam
+  # Required file argument
+  input_file_fastq_gz:
+    argument_type: file.fastq_gz
 
   # Optional parameter arguments
-  effective_genome_size:
+  nthreads:
     argument_type: parameter.integer
 
 ## Output information #######################################
@@ -33,5 +33,8 @@ input:
 output:
 
   # File output
-  output_file_txt:
+  output_report_zip:
+    argument_type: file.zip
+
+  output_summary_txt:
     argument_type: file.txt
