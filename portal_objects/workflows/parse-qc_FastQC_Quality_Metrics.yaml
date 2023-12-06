@@ -40,11 +40,11 @@ output:
 
   # QC output
   qc_values_json:
-    argument_type: qc.quality_metric_generic
+    argument_type: qc
     argument_to_be_attached_to: input_file_fastq_gz
     json: True
 
   metrics_zip:
-    argument_type: qc.quality_metric_generic
+    argument_type: qc
     argument_to_be_attached_to: input_file_fastq_gz
     zipped: True
