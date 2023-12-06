@@ -33,7 +33,7 @@ ENV LC_ALL=en_US.UTF-8
 #     Software
 #######################################################################
 ## RNASeQC 2.4.2 install
-RUN wget wget https://github.com/getzlab/rnaseqc/releases/download/v2.4.2/rnaseqc.v2.4.2.linux.gz && \
+RUN wget https://github.com/getzlab/rnaseqc/releases/download/v2.4.2/rnaseqc.v2.4.2.linux.gz && \
     gzip -d rnaseqc.v2.4.2.linux.gz && \
     chmod +x rnaseqc.v2.4.2.linux
 
