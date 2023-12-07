@@ -26,18 +26,30 @@ inputs:
     default: "FastQC Quality Metrics"
     inputBinding:
       prefix: --qm-name
+      position: 1
     doc: Name of the Quality Metric
 
-  # Files to load
+  # Files to parse per metric type
+  # fastqc -----------------------
+  - id: metrics
+    type: string
+    default: "fastqc"
+    inputBinding:
+      prefix: --metrics
+      position: 2
+
   - id: fastqc_summary_txt
     type: File
     inputBinding:
-      prefix: "--metrics fastqc"
+      position: 3
+  # ------------------------------
 
+  # Additional files to load
   - id: fastqc_report_zip
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 4
 
 outputs:
   - id: qc_values_json

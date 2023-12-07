@@ -11,4 +11,4 @@ gtf_collapsed=$2
 tar -zcf rnaseqc_output.tar.gz ./rnaseqc_output_dir/ || exit 1
 
 # Create metrics JSON
-python collect_rnaseqc_metrics.py -m /usr/local/bin/rnaseqc_output_dir/ -s sample -o metrics.json
+python collect_rnaseqc_metrics.py -m /usr/local/bin/rnaseqc_output_dir/ -s sample -o metrics.json || exit 1
