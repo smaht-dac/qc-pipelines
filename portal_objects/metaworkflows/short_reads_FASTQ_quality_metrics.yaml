@@ -33,7 +33,7 @@ input:
         flag: True
       c2:
         rule: Basic Statistics|==|PASS|PASS
-    qc_rule: {c1} and {c2}
+    qc_rule: "{c1} and {c2}"
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
