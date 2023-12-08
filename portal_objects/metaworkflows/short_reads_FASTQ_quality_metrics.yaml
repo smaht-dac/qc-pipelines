@@ -24,6 +24,17 @@ input:
     argument_type: parameter.integer
     value: 1
 
+  # QC ruleset
+  qc_ruleset_FastQC:
+    argument_type: parameter.object
+    qc_thresholds:
+      c1:
+        rule: Total Sequences|>=|309943297|109943297
+        flag: True
+      c2:
+        rule: Basic Statistics|==|PASS|PASS
+    qc_rule: {c1} and {c2}
+
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
 #############################################################
@@ -104,6 +115,10 @@ workflows:
         argument_type: file.txt
         source: fastqc
         source_argument_name: output_summary_txt
+
+      qc_ruleset:
+        argument_type: parameter.object
+        source_argument_name: qc_ruleset_FastQC
 
     ## Output ##########################
     ####################################

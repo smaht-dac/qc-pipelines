@@ -33,6 +33,10 @@ input:
   fastqc_report_zip:
     argument_type: file.zip
 
+  # Optional QC ruleset
+  qc_ruleset:
+    argument_type: parameter.object
+
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################
