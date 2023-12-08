@@ -50,78 +50,125 @@ inputs:
     default: "BAM Quality Metrics"
     inputBinding:
       prefix: --qm-name
+      position: 1
     doc: Name of the Quality Metric
 
-  # Files to load
+  # Files to parse per metric type
+  #  samtools_stats
+  - id: metrics_samtools_stats
+    type: string
+    default: "samtools_stats"
+    inputBinding:
+      prefix: --metrics
+      position: 2
+
   - id: SAMTOOLS_stats_OUTPUT
     type: File
     inputBinding:
-      prefix: "--metrics samtools_stats"
+      position: 3
+  # ------------------------------
+
+  #  picard_CollectAlignmentSummaryMetrics
+  - id: metrics_picard_CollectAlignmentSummaryMetrics
+    type: string
+    default: "picard_CollectAlignmentSummaryMetrics"
+    inputBinding:
+      prefix: --metrics
+      position: 4
 
   - id: PICARD_CollectAlignmentSummaryMetrics_OUTPUT
     type: File
     inputBinding:
-      prefix: "--metrics picard_CollectAlignmentSummaryMetrics"
+      position: 5
+  # ------------------------------
+
+  #  picard_CollectInsertSizeMetrics
+  - id: metrics_picard_CollectInsertSizeMetrics
+    type: string
+    default: "picard_CollectInsertSizeMetrics"
+    inputBinding:
+      prefix: --metrics
+      position: 6
 
   - id: PICARD_CollectInsertSizeMetrics_OUTPUT
     type: File
     inputBinding:
-      prefix: "--metrics picard_CollectInsertSizeMetrics"
+      position: 7
+  # ------------------------------
+
+  #  picard_CollectWgsMetrics
+  - id: metrics_picard_CollectWgsMetrics
+    type: string
+    default: "picard_CollectWgsMetrics"
+    inputBinding:
+      prefix: --metrics
+      position: 8
 
   - id: PICARD_CollectWgsMetrics_OUTPUT
     type: File
     inputBinding:
-      prefix: "--metrics picard_CollectWgsMetrics"
+      position: 9
+  # ------------------------------
 
   - id: SAMTOOLS_flagstat_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 10
 
   - id: SAMTOOLS_idxstats_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 11
 
   - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 12
 
   - id: PICARD_CollectBaseDistributionByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 13
 
   - id: PICARD_CollectGcBiasMetrics_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 14
 
   - id: PICARD_CollectGcBiasMetrics_SUMMARY
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 15
 
   - id: PICARD_CollectGcBiasMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 16
 
   - id: PICARD_CollectInsertSizeMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 17
 
   - id: PICARD_MeanQualityByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 18
 
   - id: PICARD_MeanQualityByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
+      position: 19
 
 outputs:
   - id: qc_values_json

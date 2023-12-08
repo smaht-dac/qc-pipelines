@@ -541,6 +541,26 @@ workflows:
         source: picard_MeanQualityByCycle
         source_argument_name: output_chart_pdf
 
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      qc_values_json:
+        description: QC output JSON
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+      metrics_zip:
+        description: QC compressed output
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+          - Image
+
     ## EC2 Configuration to use ########
     ####################################
     config:
