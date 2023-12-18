@@ -9,33 +9,33 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.SAMTOOLS_stats_OUTPUT)
-        entryname: output.samtools.stats
+        entryname: samtools.stats.txt
       - entry: $(inputs.SAMTOOLS_flagstat_OUTPUT)
-        entryname: output.samtools.flagstat
+        entryname: samtools.flagstat.txt
       - entry: $(inputs.SAMTOOLS_idxstats_OUTPUT)
-        entryname: output.samtools.idxstats
+        entryname: samtools.idxstats.txt
       - entry: $(inputs.PICARD_CollectAlignmentSummaryMetrics_OUTPUT)
-        entryname: output.picard.CollectAlignmentSummaryMetrics
+        entryname: picard.CollectAlignmentSummaryMetrics.txt
       - entry: $(inputs.PICARD_CollectBaseDistributionByCycle_OUTPUT)
-        entryname: output.picard.CollectBaseDistributionByCycle
+        entryname: picard.CollectBaseDistributionByCycle.txt
       - entry: $(inputs.PICARD_CollectBaseDistributionByCycle_PDF)
-        entryname: collect_base_dist_by_cycle.pdf
+        entryname: picard.CollectBaseDistributionByCycle.pdf
       - entry: $(inputs.PICARD_CollectGcBiasMetrics_OUTPUT)
-        entryname: output.picard.CollectGcBiasMetrics
+        entryname: picard.CollectGcBiasMetrics.txt
       - entry: $(inputs.PICARD_CollectGcBiasMetrics_SUMMARY)
-        entryname: summary.picard.CollectGcBiasMetrics
+        entryname: picard.CollectGcBiasMetrics.summary.txt
       - entry: $(inputs.PICARD_CollectGcBiasMetrics_PDF)
-        entryname: gc_bias_metrics.pdf
+        entryname: picard.CollectGcBiasMetrics.pdf
       - entry: $(inputs.PICARD_CollectInsertSizeMetrics_OUTPUT)
-        entryname: output.picard.CollectInsertSizeMetrics
+        entryname: picard.CollectInsertSizeMetrics.txt
       - entry: $(inputs.PICARD_CollectInsertSizeMetrics_PDF)
-        entryname: insert_size_histogram.pdf
+        entryname: picard.CollectInsertSizeMetrics.pdf
       - entry: $(inputs.PICARD_CollectWgsMetrics_OUTPUT)
-        entryname: output.picard.CollectWgsMetrics
+        entryname: picard.CollectWgsMetrics.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_OUTPUT)
-        entryname: output.picard.MeanQualityByCycle
+        entryname: picard.MeanQualityByCycle.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_PDF)
-        entryname: mean_qual_by_cycle.pdf
+        entryname: picard.MeanQualityByCycle.pdf
 
 hints:
   - class: DockerRequirement
