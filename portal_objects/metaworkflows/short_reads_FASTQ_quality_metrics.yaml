@@ -26,7 +26,7 @@ input:
 
   # QC ruleset
   qc_ruleset_FastQC:
-    argument_type: parameter.object
+    argument_type: qc_ruleset.object
     qc_thresholds:
       c1:
         rule: Total Sequences|>=|309943297|109943297
