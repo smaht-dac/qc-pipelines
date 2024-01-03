@@ -117,7 +117,7 @@ workflows:
         source_argument_name: output_summary_txt
 
       qc_ruleset:
-        argument_type: parameter.object
+        argument_type: qc_ruleset.object
         source_argument_name: qc_ruleset_FastQC
 
     ## Output ##########################

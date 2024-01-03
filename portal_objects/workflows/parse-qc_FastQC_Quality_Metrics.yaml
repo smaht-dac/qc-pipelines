@@ -35,7 +35,7 @@ input:
 
   # Optional QC ruleset
   qc_ruleset:
-    argument_type: parameter.object
+    argument_type: qc_ruleset.object
 
 ## Output information #######################################
 #     Output files and quality controls
