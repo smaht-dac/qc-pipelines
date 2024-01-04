@@ -69,6 +69,10 @@ input:
   PICARD_MeanQualityByCycle_PDF:
     argument_type: file.pdf
 
+  BAMSTATS_OUTPUT:
+    argument_type: file.txt
+
+
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################

@@ -36,6 +36,8 @@ requirements:
         entryname: picard.MeanQualityByCycle.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_PDF)
         entryname: picard.MeanQualityByCycle.pdf
+      - entry: $(inputs.BAMSTATS_OUTPUT)
+        entryname: bamstats.output.txt
 
 hints:
   - class: DockerRequirement
@@ -110,65 +112,79 @@ inputs:
       position: 9
   # ------------------------------
 
-  - id: SAMTOOLS_flagstat_OUTPUT
-    type: File
+  #  bamstats
+  - id: metrics_bamstats
+    type: string
+    default: "bamstats"
     inputBinding:
-      prefix: --additional-files
+      prefix: --metrics
       position: 10
 
-  - id: SAMTOOLS_idxstats_OUTPUT
+  - id: BAMSTATS_OUTPUT
     type: File
     inputBinding:
-      prefix: --additional-files
       position: 11
+  # ------------------------------
 
-  - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
+  - id: SAMTOOLS_flagstat_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
       position: 12
 
-  - id: PICARD_CollectBaseDistributionByCycle_PDF
+  - id: SAMTOOLS_idxstats_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
       position: 13
 
-  - id: PICARD_CollectGcBiasMetrics_OUTPUT
+  - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
       position: 14
 
-  - id: PICARD_CollectGcBiasMetrics_SUMMARY
+  - id: PICARD_CollectBaseDistributionByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
       position: 15
 
-  - id: PICARD_CollectGcBiasMetrics_PDF
+  - id: PICARD_CollectGcBiasMetrics_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
       position: 16
 
-  - id: PICARD_CollectInsertSizeMetrics_PDF
+  - id: PICARD_CollectGcBiasMetrics_SUMMARY
     type: File
     inputBinding:
       prefix: --additional-files
       position: 17
 
-  - id: PICARD_MeanQualityByCycle_OUTPUT
+  - id: PICARD_CollectGcBiasMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
       position: 18
 
-  - id: PICARD_MeanQualityByCycle_PDF
+  - id: PICARD_CollectInsertSizeMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
       position: 19
+
+  - id: PICARD_MeanQualityByCycle_OUTPUT
+    type: File
+    inputBinding:
+      prefix: --additional-files
+      position: 20
+
+  - id: PICARD_MeanQualityByCycle_PDF
+    type: File
+    inputBinding:
+      prefix: --additional-files
+      position: 21
 
 outputs:
   - id: qc_values_json
