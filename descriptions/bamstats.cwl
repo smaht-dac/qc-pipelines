@@ -20,13 +20,6 @@ inputs:
       prefix: -b
     doc: Input file in BAM format
 
-  - id: effective_genome_size
-    type: int
-    default: 2913022398
-    inputBinding:
-      prefix: -g
-    doc: Effective genome size used to calculate coverage
-
 outputs:
   - id: output_file_txt
     type: File
