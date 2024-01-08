@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
+
 # This script is a Python 3 version of the script by Richard Corbett.
-# Additional modifications have beem made to accomodate the SMaHT use case.
+# Additional modifications have been made to accomodate the SMaHT use case.
 #
 # Author: Alexander Veit (alexander_veit@hms.harvard.edu)
 # Purpose: Provide a python script for iterating and calculate basic stats from a bam file

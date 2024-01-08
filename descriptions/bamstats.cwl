@@ -11,7 +11,7 @@ hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/bamstats:VERSION
 
-baseCommand: [python, bamStats.py]
+baseCommand: [bamStats.py]
 
 inputs:
   - id: input_file_bam
