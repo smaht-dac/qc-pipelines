@@ -128,7 +128,7 @@ def main(bam, quality, chip, second, gsize, print_result, out):
     for line_bytes in proc.stdout:
         line = str(line_bytes, encoding='utf-8')
         linep=line.split("\t")
-        bitFlag=int(line[1])
+        bitFlag=int(linep[1])
 
         #Do we only want the second reads of the pairs?
         if(second and (bitFlag & 64)):
