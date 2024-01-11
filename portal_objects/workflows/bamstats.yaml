@@ -23,10 +23,6 @@ input:
   input_file_bam:
     argument_type: file.bam
 
-  # Optional parameter arguments
-  effective_genome_size:
-    argument_type: parameter.integer
-
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################

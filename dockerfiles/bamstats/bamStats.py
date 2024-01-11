@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # This script is a Python 3 version of the script by Richard Corbett.
 # Additional modifications have been made to accomodate the SMaHT use case.
 #
@@ -126,7 +128,7 @@ def main(bam, quality, chip, second, gsize, print_result, out):
     for line_bytes in proc.stdout:
         line = str(line_bytes, encoding='utf-8')
         linep=line.split("\t")
-        bitFlag=int(line[1])
+        bitFlag=int(linep[1])
 
         #Do we only want the second reads of the pairs?
         if(second and (bitFlag & 64)):
@@ -237,26 +239,22 @@ def main(bam, quality, chip, second, gsize, print_result, out):
         "Number_of_Duplicates": nDups,
         "Number_Reads_Aligned": nMapped,
         "Number_Reads_Unaligned": nUnmapped,
-        "Number_Aligned_Reads_With_Mapping_Qualities": {
-            "0": mapScores[0],
-            "1-9": mapScores[1],
-            "10-19": mapScores[2],
-            "20-29": mapScores[3],
-            "30-39": mapScores[4],
-            "40-49": mapScores[5],
-            "50-59": mapScores[6],
-            "60-69": mapScores[7],
-            "70-79": mapScores[8],
-            "80-89": mapScores[9],
-        },
+        "Number_Aligned_Reads_With_Mapping_Qualities_0": mapScores[0],
+        "Number_Aligned_Reads_With_Mapping_Qualities_1_9": mapScores[1],
+        "Number_Aligned_Reads_With_Mapping_Qualities_10_19": mapScores[2],
+        "Number_Aligned_Reads_With_Mapping_Qualities_20_29": mapScores[3],
+        "Number_Aligned_Reads_With_Mapping_Qualities_30_39": mapScores[4],
+        "Number_Aligned_Reads_With_Mapping_Qualities_40_49": mapScores[5],
+        "Number_Aligned_Reads_With_Mapping_Qualities_50_59": mapScores[6],
+        "Number_Aligned_Reads_With_Mapping_Qualities_60_69": mapScores[7],
+        "Number_Aligned_Reads_With_Mapping_Qualities_70_79": mapScores[8],
+        "Number_Aligned_Reads_With_Mapping_Qualities_80_89": mapScores[9],
         "Number_Unique_Alignments": nUnAmb,
         "Number_Non_Unique_Alignments": mapScores[0],
-        "Number_Unique_Alignments_With_N_Mismatches": {
-            "0": nUnAmb0,
-            "1": nUnAmb1,
-            "2": nUnAmb2,
-            "3": nUnAmb3,
-        },
+        "Number_Unique_Alignments_With_0_Mismatches": nUnAmb0,
+        "Number_Unique_Alignments_With_1_Mismatches": nUnAmb1,
+        "Number_Unique_Alignments_With_2_Mismatches": nUnAmb2,
+        "Number_Unique_Alignments_With_3_Mismatches": nUnAmb3,
         "Number_of_Paired_Alignments": nPairedAligned,
         "Average_Insert_Size": sumInsert/nPairedAligned if nPairedAligned>0 else 0,
         f"Number_of_Uniquely_Aligned_Reads_with_Q_>=_{WQT}": WnUnambThresh,

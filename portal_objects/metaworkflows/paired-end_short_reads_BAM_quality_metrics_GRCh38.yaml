@@ -456,6 +456,46 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
+  bamstats:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        description: bamstats output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.xlarge
+        - m5.xlarge
+        - m6i.xlarge
+        - m6a.xlarge
+      ebs_size: "1.1x"
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_bamstats
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
   parse-qc_BAM_Quality_Metrics:
 
     ## Specific arguments ##############
@@ -540,6 +580,11 @@ workflows:
         argument_type: file.pdf
         source: picard_MeanQualityByCycle
         source_argument_name: output_chart_pdf
+
+      BAMSTATS_OUTPUT:
+        argument_type: file.txt
+        source: bamstats
+        source_argument_name: output_file_txt
 
     ## Output ##########################
     ####################################

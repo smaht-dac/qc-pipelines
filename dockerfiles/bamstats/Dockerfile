@@ -58,5 +58,6 @@ ENV PATH=/usr/local/bin/samtools/:$PATH
 #######################################################################
 ## bamStats
 COPY bamStats.py .
+RUN chmod +x bamStats.py
 
 CMD ["bash"]
