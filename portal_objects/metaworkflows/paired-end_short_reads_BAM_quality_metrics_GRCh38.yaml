@@ -27,7 +27,7 @@ input:
   # Parameter argument
   nthreads:
     argument_type: parameter.integer
-    value: 16
+    value: 2
 
   read_length:
     argument_type: parameter.integer
@@ -75,10 +75,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -119,10 +119,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -199,10 +199,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -246,10 +246,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -303,10 +303,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -350,10 +350,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -397,10 +397,11 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - r5.xlarge
+        - r5n.xlarge
+        - r5a.xlarge
+        - r6i.xlarge
+        - r6a.xlarge
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: False
@@ -444,10 +445,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.4xlarge
-        - m5.4xlarge
-        - m6i.4xlarge
-        - m6a.4xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
@@ -484,10 +485,10 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5a.xlarge
-        - m5.xlarge
-        - m6i.xlarge
-        - m6a.xlarge
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
