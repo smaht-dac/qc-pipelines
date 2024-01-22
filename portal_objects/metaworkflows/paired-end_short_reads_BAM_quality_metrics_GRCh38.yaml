@@ -397,11 +397,11 @@ workflows:
     ####################################
     config:
       instance_type:
-        - r5.xlarge
-        - r5n.xlarge
-        - r5a.xlarge
-        - r6i.xlarge
-        - r6a.xlarge
+        - r5.2xlarge
+        - r5n.2xlarge
+        - r5a.2xlarge
+        - r6i.2xlarge
+        - r6a.2xlarge
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: False
