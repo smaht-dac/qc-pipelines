@@ -198,4 +198,5 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate quality metrics for input BAM file
+    Run parse-qc to generate quality metrics for input BAM file. |
+    Implementation for paired-end reads

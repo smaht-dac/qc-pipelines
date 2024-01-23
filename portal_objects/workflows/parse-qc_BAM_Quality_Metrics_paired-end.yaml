@@ -1,13 +1,13 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: parse-qc_BAM_Quality_Metrics
-description: Run parse-qc to generate quality metrics. |
+name: parse-qc_BAM_Quality_Metrics_paired-end
+description: Run parse-qc to generate quality metrics for paired-end reads. |
              Implementation to generate metrics for a BAM file
 
 runner:
   language: cwl
-  main: parse-qc_BAM_Quality_Metrics.cwl
+  main: parse-qc_BAM_Quality_Metrics_paired-end.cwl
 
 software:
   - qc-parser@in_dev

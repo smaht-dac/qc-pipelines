@@ -1,9 +1,9 @@
 ## Pipeline information #####################################
 #     General information for the pipeline
 #############################################################
-name: paired-end_short_reads_BAM_quality_metrics_GRCh38
+name: long_reads_BAM_quality_metrics_GRCh38
 description: Calculate quality metrics for input files in BAM format. |
-             Implementation for paired-end short reads data
+             Implementation for long reads data
 
 category:
   - Quality Control
@@ -31,7 +31,7 @@ input:
 
   read_length:
     argument_type: parameter.integer
-    value: 150
+    value: 20000
 
   # TODO
   # qc_ruleset
@@ -315,53 +315,6 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  picard_CollectInsertSizeMetrics:
-
-    ## Specific arguments ##############
-    ####################################
-    input:
-
-      # File arguments
-      input_file_bam:
-        argument_type: file.bam
-        source_argument_name: input_files_bam
-        scatter: 1
-
-    ## Output ##########################
-    ####################################
-    output:
-
-      # File output
-      output_file_txt:
-        description: picard CollectInsertSizeMetrics output TXT
-        data_category:
-          - Quality Control
-        data_type:
-          - Statistics
-
-      output_histogram_pdf:
-        description: picard CollectInsertSizeMetrics output PDF
-        data_category:
-          - Quality Control
-        data_type:
-          - Image
-
-    ## EC2 Configuration to use ########
-    ####################################
-    config:
-      instance_type:
-        - m5a.large
-        - m5.large
-        - m6i.large
-        - m6a.large
-      ebs_size: "1.1x"
-      ebs_optimized: True
-      spot_instance: True
-      run_name: run_picard_CollectInsertSizeMetrics
-      behavior_on_capacity_limit: wait_and_retry
-
-  ## Workflow definition #####################
-  ############################################
   picard_CollectWgsMetrics:
 
     ## Specific arguments ##############
@@ -497,7 +450,7 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  parse-qc_BAM_Quality_Metrics_paired-end:
+  parse-qc_BAM_Quality_Metrics_single-end:
 
     ## Specific arguments ##############
     ####################################
@@ -557,16 +510,6 @@ workflows:
         source: picard_CollectGcBiasMetrics
         source_argument_name: output_chart_pdf
 
-      PICARD_CollectInsertSizeMetrics_OUTPUT:
-        argument_type: file.txt
-        source: picard_CollectInsertSizeMetrics
-        source_argument_name: output_file_txt
-
-      PICARD_CollectInsertSizeMetrics_PDF:
-        argument_type: file.pdf
-        source: picard_CollectInsertSizeMetrics
-        source_argument_name: output_histogram_pdf
-
       PICARD_CollectWgsMetrics_OUTPUT:
         argument_type: file.txt
         source: picard_CollectWgsMetrics
@@ -615,5 +558,5 @@ workflows:
       ebs_size: 10
       ebs_optimized: True
       spot_instance: True
-      run_name: run_parse-qc_BAM_Quality_Metrics_paired-end
+      run_name: run_parse-qc_BAM_Quality_Metrics_single-end
       behavior_on_capacity_limit: wait_and_retry
