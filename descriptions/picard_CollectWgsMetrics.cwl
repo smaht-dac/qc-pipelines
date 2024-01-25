@@ -59,6 +59,13 @@ inputs:
       prefix: --READ_LENGTH
     doc: Average read length in the file [150]
 
+  - id: count_unpaired
+    default: null
+    inputBinding:
+      prefix: --COUNT_UNPAIRED
+    type: boolean
+    doc: If true, count unpaired reads, and paired reads with one end unmapped [false]
+
 outputs:
   - id: output_file_txt
     type: File

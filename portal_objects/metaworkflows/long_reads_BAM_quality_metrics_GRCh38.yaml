@@ -33,6 +33,10 @@ input:
     argument_type: parameter.integer
     value: 20000
 
+  count_unpaired:
+    argument_type: parameter.boolean
+    value: True
+
   # TODO
   # qc_ruleset
 
@@ -333,6 +337,9 @@ workflows:
       # Parameter arguments
       read_length:
         argument_type: parameter.integer
+
+      count_unpaired:
+        argument_type: parameter.boolean
 
     ## Output ##########################
     ####################################

@@ -37,6 +37,10 @@ input:
     argument_type: parameter.integer
     # default: 150
 
+  count_unpaired:
+    argument_type: parameter.boolean
+    # default: false
+
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################
