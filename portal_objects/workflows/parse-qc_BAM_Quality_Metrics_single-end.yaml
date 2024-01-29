@@ -54,9 +54,6 @@ input:
   PICARD_CollectGcBiasMetrics_PDF:
     argument_type: file.pdf
 
-  PICARD_CollectWgsMetrics_OUTPUT:
-    argument_type: file.txt
-
   PICARD_MeanQualityByCycle_OUTPUT:
     argument_type: file.txt
 
