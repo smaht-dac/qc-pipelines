@@ -26,8 +26,6 @@ requirements:
         entryname: picard.CollectGcBiasMetrics.summary.txt
       - entry: $(inputs.PICARD_CollectGcBiasMetrics_PDF)
         entryname: picard.CollectGcBiasMetrics.pdf
-      - entry: $(inputs.PICARD_CollectWgsMetrics_OUTPUT)
-        entryname: picard.CollectWgsMetrics.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_OUTPUT)
         entryname: picard.MeanQualityByCycle.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_PDF)
@@ -80,87 +78,73 @@ inputs:
       position: 5
   # ------------------------------
 
-  #  picard_CollectWgsMetrics
-  - id: metrics_picard_CollectWgsMetrics
-    type: string
-    default: "picard_CollectWgsMetrics"
-    inputBinding:
-      prefix: --metrics
-      position: 6
-
-  - id: PICARD_CollectWgsMetrics_OUTPUT
-    type: File
-    inputBinding:
-      position: 7
-  # ------------------------------
-
   #  bamstats
   - id: metrics_bamstats
     type: string
     default: "bamstats"
     inputBinding:
       prefix: --metrics
-      position: 8
+      position: 6
 
   - id: BAMSTATS_OUTPUT
     type: File
     inputBinding:
-      position: 9
+      position: 7
   # ------------------------------
 
   - id: SAMTOOLS_flagstat_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 10
+      position: 8
 
   - id: SAMTOOLS_idxstats_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 11
+      position: 9
 
   - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 12
+      position: 10
 
   - id: PICARD_CollectBaseDistributionByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 13
+      position: 11
 
   - id: PICARD_CollectGcBiasMetrics_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 14
+      position: 12
 
   - id: PICARD_CollectGcBiasMetrics_SUMMARY
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 15
+      position: 13
 
   - id: PICARD_CollectGcBiasMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 16
+      position: 14
 
   - id: PICARD_MeanQualityByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 17
+      position: 15
 
   - id: PICARD_MeanQualityByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 18
+      position: 16
 
 outputs:
   - id: qc_values_json
