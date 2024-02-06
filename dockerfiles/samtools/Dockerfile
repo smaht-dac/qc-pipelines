@@ -7,6 +7,7 @@ LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Mazie
 
 #######################################################################
 #     General updates & installing necessary Linux components
+#       - libncurses-dev, libbz2-dev, liblzma-dev used by samtools
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
