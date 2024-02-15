@@ -70,6 +70,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -114,6 +115,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -154,6 +156,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -194,6 +197,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -234,6 +238,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
       output_chart_pdf:
         description: picard CollectBaseDistributionByCycle output PDF
@@ -241,6 +246,7 @@ workflows:
           - Quality Control
         data_type:
           - Image
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -284,6 +290,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
       output_summary_txt:
         description: picard CollectGcBiasMetrics summary TXT
@@ -291,6 +298,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
       output_chart_pdf:
         description: picard CollectGcBiasMetrics output PDF
@@ -298,6 +306,7 @@ workflows:
           - Quality Control
         data_type:
           - Image
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -338,6 +347,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
       output_histogram_pdf:
         description: picard CollectInsertSizeMetrics output PDF
@@ -345,6 +355,7 @@ workflows:
           - Quality Control
         data_type:
           - Image
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -392,6 +403,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -433,6 +445,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
       output_chart_pdf:
         description: picard MeanQualityByCycle output PDF
@@ -440,6 +453,7 @@ workflows:
           - Quality Control
         data_type:
           - Image
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -480,6 +494,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
