@@ -71,8 +71,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='')
 
-    parser.add_argument('-i','--inputfiles', nargs='+', help="list of input files containing lane's identifiers", required=True)
-    parser.add_argument('-o','--outputlog', help="output log file", default='log.txt', required=False)
+    parser.add_argument('-i', '--inputfiles', nargs='+', help="list of input files containing lane's identifiers", required=True)
+    parser.add_argument('-o', '--outputlog', help="output log file", default='log.txt', required=False)
 
     args = vars(parser.parse_args())
 

@@ -118,8 +118,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='')
 
-    parser.add_argument('-i','--inputfile', help='input FASTQ file', required=True)
-    parser.add_argument('-o','--outputfile', help="output file with lane's identifiers", required=True)
+    parser.add_argument('-i', '--inputfile', help='input FASTQ file', required=True)
+    parser.add_argument('-o', '--outputfile', help="output file with lane's identifiers", required=True)
 
     args = vars(parser.parse_args())
 
