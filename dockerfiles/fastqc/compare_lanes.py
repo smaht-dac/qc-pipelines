@@ -33,6 +33,7 @@ import sys, argparse, os
 def main(args):
 
     identifiers_dict = {}
+    output_log = ''
 
     # Collecting lane information
     for file in args['inputfiles']:
@@ -46,18 +47,19 @@ def main(args):
 
     # Parsing lane information
     is_duplicate = False
-    sys.stdout.write('\n')
     for identifier, filenames_list in identifiers_dict.items():
-        filenames = ','.join(filenames_list)
-        sys.stdout.write(f'{identifier}: {filenames}\n')
+        filenames = '|'.join(filenames_list)
+        output_log += f'{identifier}: {filenames}\n'
         if len(filenames_list) > 1:
             is_duplicate = True
 
     # Fail if duplicates
     if is_duplicate:
-        sys.exit("\nFiles with duplicate lane's identifiers found!\n")
+        sys.stderr.write(output_log)
+        sys.exit("\nERROR. Files with duplicate lane's identifiers found!\n")
 
-    sys.stdout.write('\nAll good!\n')
+    sys.stdout.write(output_log)
+    sys.stderr.write("\nAll good. No duplicate lane's identifiers found!\n")
 
 ################################################
 #   MAIN
