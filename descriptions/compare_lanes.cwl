@@ -33,9 +33,9 @@ inputs:
 
 outputs:
   - id: output_log_txt
-    type: stdout
-
-stdout: log.txt
+    type: File
+    outputBinding:
+      glob: log.txt
 
 doc: |
   Run compare_lanes.py to compare lane identifiers |

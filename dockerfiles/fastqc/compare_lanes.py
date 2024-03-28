@@ -58,7 +58,10 @@ def main(args):
         sys.stderr.write(output_log)
         sys.exit("\nERROR. Files with duplicate lane's identifiers found!\n")
 
-    sys.stdout.write(output_log)
+    # Write output log if pass
+    with open(args['outputlog'], 'w') as fo:
+        fo.write(output_log)
+
     sys.stderr.write("\nAll good. No duplicate lane's identifiers found!\n")
 
 ################################################
@@ -69,6 +72,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
 
     parser.add_argument('-i','--inputfiles', nargs='+', help="list of input files containing lane's identifiers", required=True)
+    parser.add_argument('-o','--outputlog', help="output log file", default='log.txt', required=False)
 
     args = vars(parser.parse_args())
 
