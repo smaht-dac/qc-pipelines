@@ -46,10 +46,10 @@ def main(args):
 
     # Parsing lane information
     is_duplicate = False
-    sys.stderr.write('\n')
+    sys.stdout.write('\n')
     for identifier, filenames_list in identifiers_dict.items():
         filenames = ','.join(filenames_list)
-        sys.stderr.write(f'{identifier}: {filenames}\n')
+        sys.stdout.write(f'{identifier}: {filenames}\n')
         if len(filenames_list) > 1:
             is_duplicate = True
 
@@ -57,7 +57,7 @@ def main(args):
     if is_duplicate:
         sys.exit("\nFiles with duplicate lane's identifiers found!\n")
 
-    sys.stderr.write('\nAll good!\n')
+    sys.stdout.write('\nAll good!\n')
 
 ################################################
 #   MAIN
