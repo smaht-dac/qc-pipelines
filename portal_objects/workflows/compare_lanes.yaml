@@ -1,0 +1,31 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: compare_lanes
+description: Run compare_lanes.py to compare lane identifiers |
+             across multiple FASTQ files checking for duplicates
+
+runner:
+  language: cwl
+  main: compare_lanes.cwl
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_files_txt:
+    argument_type: file.txt
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_log_txt:
+    argument_type: file.txt

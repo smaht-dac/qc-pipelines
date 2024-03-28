@@ -1,0 +1,30 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: get_fastq_lanes
+description: Run get_fastq_lanes.py to collect lane identifiers in input FASTQ file
+
+runner:
+  language: cwl
+  main: get_fastq_lanes.cwl
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_fastq_gz:
+    argument_type: file.fastq_gz
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt

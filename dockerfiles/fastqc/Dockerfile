@@ -46,4 +46,12 @@ ENV PATH=/usr/local/bin/FastQC/:$PATH
 COPY run.sh .
 RUN chmod +x run.sh
 
+## get_fastq_lanes
+COPY get_fastq_lanes.py .
+RUN chmod +x get_fastq_lanes.py
+
+## compare_lanes
+COPY compare_lanes.py .
+RUN chmod +x compare_lanes.py
+
 CMD ["bash"]
