@@ -94,15 +94,15 @@ class FASTQParser(object):
 ################################################
 def main(args):
 
-    # Data Structures
+    # Data structures
     filename = args['inputfile']
     lanes_set = set()
 
     # Init FASTQParser
-    fasqt_parser = FASTQParser(filename)
+    fastq_parser = FASTQParser(filename)
 
     # Read file
-    for i, read_obj in enumerate(fasqt_parser.parse_reads()):
+    for i, read_obj in enumerate(fastq_parser.parse_reads()):
         lanes_set.add(read_obj.get_lane_illumina())
 
     # Write output
