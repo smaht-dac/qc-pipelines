@@ -130,6 +130,7 @@ workflows:
       #   compare_lanes before start running
       input_log_txt:
         argument_type: file.txt
+        source: compare_lanes
         source_argument_name: output_log_txt
         gather: 1
 
