@@ -110,12 +110,6 @@ workflows:
   ############################################
   fastqc:
 
-    ## Hard dependencies ###############
-    #   Dependencies that must complete
-    ####################################
-    dependencies:
-      - compare_lanes
-
     ## Specific arguments ##############
     ####################################
     input:
@@ -129,6 +123,15 @@ workflows:
       # Parameter arguments
       nthreads:
         argument_type: parameter.integer
+
+      # compare_lanes dependency
+      #   this is a fake dependency to force
+      #   fastqc step to wait success of both
+      #   compare_lanes before start running
+      input_log_txt:
+        argument_type: file.txt
+        source_argument_name: output_log_txt
+        gather: 1
 
     ## Output ##########################
     ####################################
