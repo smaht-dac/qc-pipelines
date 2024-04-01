@@ -15,18 +15,9 @@ category:
 input:
 
   # File argument
-  input_files_r1_fastq_gz:
-    # lane's identifiers check will only look at R1 FASTQ files
-    # to save computing time and resources
-    # since R1 and R2 will contain the same lane's identifiers
-    argument_type: file.fastq_gz
-    dimensionality: 1
-
   input_files_fastq_gz:
-    # this array will store all the FASTQ files
-    # since we need to run FastQC for all
     argument_type: file.fastq_gz
-    dimensionality: 1
+    dimensionality: 2
 
   # Parameter argument
   nthreads:
@@ -49,8 +40,8 @@ workflows:
       # File arguments
       input_file_fastq_gz:
         argument_type: file.fastq_gz
-        source_argument_name: input_files_r1_fastq_gz
-        scatter: 1
+        source_argument_name: input_files_fastq_gz
+        scatter: 2
 
     ## Output ##########################
     ####################################
@@ -133,7 +124,7 @@ workflows:
       input_file_fastq_gz:
         argument_type: file.fastq_gz
         source_argument_name: input_files_fastq_gz
-        scatter: 1
+        scatter: 2
 
       # Parameter arguments
       nthreads:
