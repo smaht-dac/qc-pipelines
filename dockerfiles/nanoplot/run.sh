@@ -28,12 +28,15 @@ else
     exit 1
 fi
 
+# Create local symlink to input_file where NanoPlot has write permission
+#   NanoPlot will try to write a local index for input_file
+ln -s $input_file input_file.${extension}
 
 ###################################################
 # Run
 ###################################################
 echo "Using ${flag}"
-NanoPlot -t $nt --N50 $flag $input_file -o . || exit 1
+NanoPlot -t $nt --N50 $flag input_file.${extension} -o . || exit 1
 
 # This will generate the following files
 #   NanoStats.txt                     <---
