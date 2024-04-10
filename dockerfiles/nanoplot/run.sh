@@ -33,7 +33,7 @@ fi
 # Run
 ###################################################
 echo "Using ${flag}"
-NanoPlot -t $nt --N50 $flag $input_file -o .|| exit 1
+NanoPlot -t $nt --N50 $flag $input_file -o . || exit 1
 
 # This will generate the following files
 #   NanoStats.txt                     <---
