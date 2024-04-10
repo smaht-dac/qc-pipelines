@@ -2,7 +2,7 @@
 
 ## Variables
 input_file=$1
-# could be fastq or unmapped BAM (uBAM)
+# could be FASTQ or unmapped BAM (uBAM)
 
 nt=$(nproc) # number of threads to use in computation,
             # set to number of cores in the server

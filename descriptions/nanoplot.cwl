@@ -32,6 +32,5 @@ outputs:
     outputBinding:
       glob: "NanoStats.txt"
 
-
 doc: |
   Run NanoPlot
