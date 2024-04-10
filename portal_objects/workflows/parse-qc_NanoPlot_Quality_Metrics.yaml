@@ -1,0 +1,51 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: parse-qc_NanoPlot_Quality_Metrics
+description: Run parse-qc to generate quality metrics for long reads. |
+             Implementation to generate metrics for a FASTQ or unaligned BAM file
+
+runner:
+  language: cwl
+  main: parse-qc_NanoPlot_Quality_Metrics.cwl
+
+software:
+  - qc-parser@in_dev
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file:
+    # FASTQ or unmapped BAM (uBAM)
+    argument_type: file.any
+    # this file is actually not used by the code but is needed
+    #   to specify where the quality metrics object need to be linked
+
+  # Files to load
+  nanoplot_metrics_txt:
+    argument_type: file.txt
+
+  nanoplot_metrics_html:
+    argument_type: file.html
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # QC output
+  qc_values_json:
+    argument_type: qc
+    argument_to_be_attached_to: input_file
+    json: True
+
+  metrics_zip:
+    argument_type: qc
+    argument_to_be_attached_to: input_file
+    zipped: True

@@ -30,7 +30,7 @@ ENV LC_ALL=en_US.UTF-8
 #     Software
 #######################################################################
 ## Python dependencies
-RUN pip install NanoPlot
+RUN pip install NanoPlot==1.42.0
 
 #######################################################################
 #     Scripts

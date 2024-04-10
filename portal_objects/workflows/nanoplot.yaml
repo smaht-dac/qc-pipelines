@@ -1,0 +1,38 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: nanoplot
+description: Run NanoPlot on input file. |
+             Accept files in FASTQ format or unaligned BAM files
+
+runner:
+  language: cwl
+  main: nanoplot.cwl
+
+software:
+  - NanoPlot@1.42.0
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file argument
+  input_file:
+    # FASTQ or unmapped BAM (uBAM)
+    argument_type: file.any
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_html:
+    argument_type: file.html
+
+  output_file_txt:
+    argument_type: file.txt

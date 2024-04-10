@@ -23,6 +23,8 @@ if [[ "$extension" == "bam" ]]; then
     flag="--ubam"
 elif [[ "$extension" == "fastq.gz" ]]; then
     flag="--fastq"
+elif [[ "$extension" == "fastq" ]]; then
+    flag="--fastq"
 else
     echo "Unsupported file extension."
     exit 1
