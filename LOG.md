@@ -1,7 +1,8 @@
 ### Version Updates
 
 #### 0.1.0
-* *In development*
+* Added check for submission error (i.e., multiple FASTQ files for the same lane in the same library)
+* Added NanoPlot
 
 #### 0.0.1
 * Initial release of the repository
