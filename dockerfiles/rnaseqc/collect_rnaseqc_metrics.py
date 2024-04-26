@@ -16,14 +16,14 @@ import json
     help="Output file that contains the JSON encoded results",
 )
 def main(metrics_folder, sample, out):
-    """This script gathers results from RNASeQC and produces a QC JSON 
+    """This script gathers results from RNASeQC and produces a QC JSON
 
     Example usage:
     python collect_rnaseqc_metrics.py -m PATH/rnaseqc_output_dir -o metrics.json
 
     """
     metrics = {}
-    metrics_tsv = f"{metrics_folder}{sample}.metrics.tsv"
+    metrics_tsv = f"{metrics_folder}/{sample}.metrics.tsv"
     with open(metrics_tsv) as f:
         next(f)  # Skip header
         for line in f:
@@ -41,14 +41,14 @@ def main(metrics_folder, sample, out):
         if (intronic_reads > 0):
             metrics["Exonic/Intron ratio"] = exonic_reads / intronic_reads
 
-    gene_reads_file = f"{metrics_folder}{sample}.gene_reads.gct"
+    gene_reads_file = f"{metrics_folder}/{sample}.gene_reads.gct"
     (genes_w_mt_0_reads, genes_w_mt_2_reads,
      genes_w_mt_10_reads) = process_reads_gct(gene_reads_file)
     metrics["Genes with >0 reads"] = genes_w_mt_0_reads
     metrics["Genes with >=2 reads"] = genes_w_mt_2_reads
     metrics["Genes with >=10 reads"] = genes_w_mt_10_reads
 
-    exon_reads_file = f"{metrics_folder}{sample}.exon_reads.gct"
+    exon_reads_file = f"{metrics_folder}/{sample}.exon_reads.gct"
     (exon_w_mt_0_reads, exon_w_mt_2_reads,
      exon_w_mt_10_reads) = process_reads_gct(exon_reads_file)
     metrics["Exons with >0 reads"] = exon_w_mt_0_reads

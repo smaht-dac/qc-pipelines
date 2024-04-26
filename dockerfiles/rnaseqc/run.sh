@@ -1,14 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Variables
-input_bam=$1
-gtf_collapsed=$2
+rnaseqc_tar_gz=$1
+sample=$2
 
-# The -s paramter will produce output files of the form sample.*, e.g., sample.coverage.tsv
-./rnaseqc $gtf_collapsed $input_bam rnaseqc_output_dir -s sample --coverage || exit 1
-
-# Compress all output. This can be downloaded from the portal
-tar -zcf rnaseqc_output.tar.gz ./rnaseqc_output_dir/ || exit 1
+# Exctract the metrics files
+tar -xvzf $rnaseqc_tar_gz
 
 # Create metrics JSON
-python collect_rnaseqc_metrics.py -m /usr/local/bin/rnaseqc_output_dir/ -s sample -o metrics.json || exit 1
+python collect_rnaseqc_metrics.py -m . -s $sample -o metrics.json || exit 1
