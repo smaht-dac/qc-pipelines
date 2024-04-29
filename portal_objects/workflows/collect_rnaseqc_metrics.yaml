@@ -20,10 +20,6 @@ input:
   input_tar_gz:
     argument_type: file.tar_gz
 
-  # Optional parameter arguments
-  sample_name:
-    argument_type: parameter.string
-
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################
