@@ -23,9 +23,10 @@ inputs:
 
   - id: sample_name
     type: string
+    default: "out"
     inputBinding:
       position: 2
-    doc: Name of the sample
+    doc: Prefix for output files to parse
 
 outputs:
   - id: output_file_json
