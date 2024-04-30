@@ -41,10 +41,10 @@ output:
   # QC output
   qc_values_json:
     argument_type: qc
-    argument_to_be_attached_to: input_file_fastq_gz
+    argument_to_be_attached_to: input_file_bam
     json: True
 
   metrics_zip:
     argument_type: qc
-    argument_to_be_attached_to: input_file_fastq_gz
+    argument_to_be_attached_to: input_file_bam
     zipped: True
