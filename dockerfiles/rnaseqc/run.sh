@@ -8,4 +8,4 @@ sample=$2
 tar -xvzf $rnaseqc_tar_gz
 
 # Create metrics JSON
-python collect_rnaseqc_metrics.py -m . -s $sample -o metrics.json || exit 1
+collect_rnaseqc_metrics.py -m . -s $sample -o metrics.json || exit 1

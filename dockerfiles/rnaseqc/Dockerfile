@@ -38,6 +38,7 @@ RUN pip install click
 ## collect_rnaseqc_metrics run
 COPY collect_rnaseqc_metrics.py .
 COPY run.sh .
+RUN chmod +x collect_rnaseqc_metrics.py
 RUN chmod +x run.sh
 
 CMD ["bash"]
