@@ -93,7 +93,6 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
-        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -128,7 +127,7 @@ workflows:
       #   this is a fake dependency to force
       #   fastqc step to wait success of both
       #   compare_lanes before start running
-      input_log_txt:
+      input_logs_txt:
         argument_type: file.txt
         source: compare_lanes
         source_argument_name: output_log_txt
