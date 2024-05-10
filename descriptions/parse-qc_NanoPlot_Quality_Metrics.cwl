@@ -30,7 +30,7 @@ inputs:
     doc: Name of the Quality Metric
 
   # Files to parse per metric type
-  # nanoplot ---------------------
+  # nanoplot
   - id: metrics_nanoplot
     type: string
     default: "nanoplot"

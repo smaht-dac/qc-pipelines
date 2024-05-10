@@ -30,7 +30,7 @@ inputs:
     doc: Name of the Quality Metric
 
   # Files to parse per metric type
-  # fastqc -----------------------
+  # fastqc
   - id: metrics_fastqc
     type: string
     default: "fastqc"

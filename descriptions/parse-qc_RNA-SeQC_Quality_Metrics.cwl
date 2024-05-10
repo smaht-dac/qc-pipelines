@@ -30,7 +30,7 @@ inputs:
     doc: Name of the Quality Metric
 
   # Files to parse per metric type
-  # fastqc -----------------------
+  # rnaseqc
   - id: metrics_rnaseqc
     type: string
     default: "rnaseqc"
