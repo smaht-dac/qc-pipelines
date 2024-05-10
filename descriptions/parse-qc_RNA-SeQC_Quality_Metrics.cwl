@@ -31,7 +31,7 @@ inputs:
 
   # Files to parse per metric type
   # fastqc -----------------------
-  - id: metrics_fastqc
+  - id: metrics_rnaseqc
     type: string
     default: "rnaseqc"
     inputBinding:
