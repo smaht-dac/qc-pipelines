@@ -8,10 +8,10 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - entry: $(inputs.fastqc_summary_txt)
-        entryname: fastqc.summary.txt
-      - entry: $(inputs.fastqc_report_zip)
-        entryname: fastqc.report.zip
+      - entry: $(inputs.input_file_json)
+        entryname: rnaseqc.summary.json
+      - entry: $(inputs.input_tar_gz)
+        entryname: rnaseqc.out.tar.gz
 
 hints:
   - class: DockerRequirement
@@ -23,29 +23,29 @@ inputs:
   # Input arguments
   - id: qm_name
     type: string
-    default: "FastQC Quality Metrics"
+    default: "RNA-SeQC Quality Metrics"
     inputBinding:
       prefix: --qm-name
       position: 1
     doc: Name of the Quality Metric
 
   # Files to parse per metric type
-  # fastqc
-  - id: metrics_fastqc
+  # rnaseqc
+  - id: metrics_rnaseqc
     type: string
-    default: "fastqc"
+    default: "rnaseqc"
     inputBinding:
       prefix: --metrics
       position: 2
 
-  - id: fastqc_summary_txt
+  - id: input_file_json
     type: File
     inputBinding:
       position: 3
   # ------------------------------
 
   # Additional files to load
-  - id: fastqc_report_zip
+  - id: input_tar_gz
     type: File
     inputBinding:
       prefix: --additional-files
@@ -63,4 +63,5 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate quality metrics for input FASTQ file
+    Run parse-qc to generate quality metrics for input BAM file. |
+    Implementation for RNA-seq

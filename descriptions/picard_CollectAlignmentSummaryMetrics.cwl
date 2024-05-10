@@ -13,7 +13,7 @@ hints:
 
 baseCommand: [picard, CollectAlignmentSummaryMetrics]
 
-arguments: [-Xmx32g]
+arguments: [-Xmx32g, --VALIDATION_STRINGENCY, LENIENT]
 
 inputs:
   - id: input_file_bam

@@ -1,0 +1,225 @@
+## Pipeline information #####################################
+#     General information for the pipeline
+#############################################################
+name: Illumina_FASTQ_quality_metrics
+description: Calculate quality metrics for input files in FASTQ format. |
+             Implementation for short reads Illumina data
+
+category:
+  - Quality Control
+
+## General arguments ########################################
+#     Pipeline input, reference files, and general arguments
+#       define all arguments for the pipeline here
+#############################################################
+input:
+
+  # File argument
+  input_files_fastq_gz:
+    argument_type: file.fastq_gz
+    dimensionality: 2
+
+  # Parameter argument
+  nthreads:
+    argument_type: parameter.integer
+    value: 1
+
+## Workflows and dependencies ###############################
+#     Information for the workflows and their dependencies
+#############################################################
+workflows:
+
+  ## Workflow definition #####################
+  ############################################
+  get_fastq_lanes:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_fastq_gz:
+        argument_type: file.fastq_gz
+        source_argument_name: input_files_fastq_gz
+        scatter: 2
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        description: lane identifiers report
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: '1.1x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_get_fastq_lanes
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  compare_lanes:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_files_txt:
+        argument_type: file.txt
+        source: get_fastq_lanes
+        source_argument_name: output_file_txt
+        gather: 1
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_log_txt:
+        description: lane identifiers summary
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: '1.1x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_compare_lanes
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  fastqc:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_fastq_gz:
+        argument_type: file.fastq_gz
+        source_argument_name: input_files_fastq_gz
+        scatter: 2
+
+      # Parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+      # compare_lanes dependency
+      #   this is a fake dependency to force
+      #   fastqc step to wait success of both
+      #   compare_lanes before start running
+      input_logs_txt:
+        argument_type: file.txt
+        source: compare_lanes
+        source_argument_name: output_log_txt
+        gather: 1
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_report_zip:
+        description: FastQC compressed output report
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+          - Image
+        s3_lifecycle_category: no_storage
+
+      output_summary_txt:
+        description: FastQC summary output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.large
+      ebs_size: '1.1x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_fastqc
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  parse-qc_FastQC_Quality_Metrics:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_fastq_gz:
+        argument_type: file.fastq_gz
+        source_argument_name: input_files_fastq_gz
+        input_dimension: 2
+        mount: True
+        # this file is actually not used by the code but is needed
+        #   to specify where the quality metrics object need to be linked
+
+      fastqc_report_zip:
+        argument_type: file.zip
+        source: fastqc
+        source_argument_name: output_report_zip
+
+      fastqc_summary_txt:
+        argument_type: file.txt
+        source: fastqc
+        source_argument_name: output_summary_txt
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      qc_values_json:
+        description: QC output JSON
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+      metrics_zip:
+        description: QC compressed output
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+          - Image
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: 10
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_parse-qc_FastQC_Quality_Metrics
+      behavior_on_capacity_limit: wait_and_retry

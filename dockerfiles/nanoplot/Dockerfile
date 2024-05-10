@@ -3,14 +3,15 @@
 #######################################################################
 FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py38:0.0.1
 
-LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Maziec (dominika_maziec@hms.harvard.edu)"
+LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Berselli (berselli.michele@gmail.com)"
 
 #######################################################################
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
-    libncurses-dev=6.3-2 \
+    tabix=1.13+ds-2build1 \
+    gzip \
     --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -28,7 +29,14 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 #     Software
 #######################################################################
-## Install qc-parser
-RUN pip install qc-parser==0.0.15
+## Python dependencies
+RUN pip install NanoPlot==1.42.0
+
+#######################################################################
+#     Scripts
+#######################################################################
+## run
+COPY run.sh .
+RUN chmod +x run.sh
 
 CMD ["bash"]

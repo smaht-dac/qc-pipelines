@@ -140,6 +140,8 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_files_bam
         scatter: 1
+        # We only need the index file
+        mount: True
 
     ## Output ##########################
     ####################################

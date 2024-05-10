@@ -8,10 +8,10 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - entry: $(inputs.fastqc_summary_txt)
-        entryname: fastqc.summary.txt
-      - entry: $(inputs.fastqc_report_zip)
-        entryname: fastqc.report.zip
+      - entry: $(inputs.nanoplot_metrics_txt)
+        entryname: nanoplot.metrics.txt
+      - entry: $(inputs.nanoplot_metrics_html)
+        entryname: nanoplot.metrics.html
 
 hints:
   - class: DockerRequirement
@@ -23,29 +23,29 @@ inputs:
   # Input arguments
   - id: qm_name
     type: string
-    default: "FastQC Quality Metrics"
+    default: "NanoPlot Quality Metrics"
     inputBinding:
       prefix: --qm-name
       position: 1
     doc: Name of the Quality Metric
 
   # Files to parse per metric type
-  # fastqc
-  - id: metrics_fastqc
+  # nanoplot
+  - id: metrics_nanoplot
     type: string
-    default: "fastqc"
+    default: "nanoplot"
     inputBinding:
       prefix: --metrics
       position: 2
 
-  - id: fastqc_summary_txt
+  - id: nanoplot_metrics_txt
     type: File
     inputBinding:
       position: 3
   # ------------------------------
 
   # Additional files to load
-  - id: fastqc_report_zip
+  - id: nanoplot_metrics_html
     type: File
     inputBinding:
       prefix: --additional-files
@@ -63,4 +63,5 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate quality metrics for input FASTQ file
+    Run parse-qc to generate quality metrics for input FASTQ or unaligned BAM file. |
+    Implementation for long reads
