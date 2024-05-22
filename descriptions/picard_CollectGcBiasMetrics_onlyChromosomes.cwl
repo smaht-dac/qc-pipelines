@@ -67,5 +67,5 @@ steps:
     out: [output_file_txt, output_summary_txt, output_chart_pdf]
 
 doc: |
-  Run samtools view command to extract canonical chromosomes from a BAM file. |
+  Run samtools view command to extract specified chromosomes from a BAM file. |
   Run picard CollectGcBiasMetrics command
