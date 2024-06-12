@@ -46,6 +46,14 @@ outputs:
     outputSource: picard_CollectGcBiasMetrics/output_chart_pdf
 
 steps:
+  picard_docker_pull:
+    # Here we are pre-pulling the Docker image used by the second step
+    # to avoid pulling it during the workflow execution,
+    # encountering probems with credentials expiring during the execution
+    run: picard_docker_pull.cwl
+    in: []
+    out: [output_log_txt]
+
   samtools_ExtractChromosomes:
     run: samtools_ExtractChromosomes.cwl
     in:
@@ -55,6 +63,9 @@ steps:
         source: chromosomes
       nthreads:
         source: nthreads
+      dummy_dependency:
+        # This is a dummy dependency to ensure that the step runs after the picard Docker image is pre-pulled
+        source: picard_docker_pull/output_log_txt
     out: [output_file_bam]
 
   picard_CollectGcBiasMetrics:
