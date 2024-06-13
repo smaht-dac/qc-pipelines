@@ -9,6 +9,7 @@ runner:
   language: cwl
   main: picard_CollectGcBiasMetrics_onlyChromosomes.cwl
   child:
+    - picard_docker_pull.cwl
     - samtools_ExtractChromosomes.cwl
     - picard_CollectGcBiasMetrics.cwl
 
