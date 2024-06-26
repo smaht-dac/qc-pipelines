@@ -18,6 +18,8 @@ arguments: [-Xmx32g, --VALIDATION_STRINGENCY, LENIENT]
 inputs:
   - id: input_file_bam
     type: File
+    secondaryFiles:
+      - .bai
     inputBinding:
       prefix: -I
     doc: Input file in BAM format
