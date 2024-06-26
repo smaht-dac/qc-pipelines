@@ -68,11 +68,11 @@ inputs:
 
   - id: interval_list
     type: File
-    default: chr22.interval_list
+    default: null
     inputBinding:
       prefix: --INTERVALS
     doc: An interval list file that contains the positions to restrict the assessment |
-         in Picard interval_list format [chr22]
+         in Picard interval_list format
 
   - id: coverage_cap
     type: int

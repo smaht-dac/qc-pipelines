@@ -29,14 +29,15 @@ input:
   # Optional file arguments
   interval_list:
     argument_type: file.interval_list
-    # default: chr22.interval_list
 
   # Optional parameter arguments
   minimum_base_quality:
     argument_type: parameter.integer
+    # default: 20
 
   minimum_mapping_quality:
     argument_type: parameter.integer
+    # default: 20
 
   read_length:
     argument_type: parameter.integer

@@ -32,11 +32,4 @@ ENV LC_ALL=en_US.UTF-8
 RUN conda install -c bioconda -y picard==3.0.0 && \
     conda clean -a -y -f
 
-#######################################################################
-#     Files
-#######################################################################
-## Region file for chr22 in Picard interval_list format
-#   generated using BedToIntervalList command
-COPY chr22.interval_list .
-
 CMD ["bash"]
