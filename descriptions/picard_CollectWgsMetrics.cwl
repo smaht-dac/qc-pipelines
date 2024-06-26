@@ -60,11 +60,27 @@ inputs:
     doc: Average read length in the file [150]
 
   - id: count_unpaired
+    type: boolean
     default: null
     inputBinding:
       prefix: --COUNT_UNPAIRED
-    type: boolean
     doc: If true, count unpaired reads, and paired reads with one end unmapped [false]
+
+  - id: interval_list
+    type: File
+    default: chr22.interval_list
+    inputBinding:
+      prefix: --INTERVALS
+    doc: An interval list file that contains the positions to restrict the assessment |
+         in Picard interval_list format [chr22]
+
+  - id: coverage_cap
+    type: int
+    default: 1000
+    inputBinding:
+      prefix: --COVERAGE_CAP
+    doc: Treat positions with coverage exceeding this value |
+         as if they had coverage at this value [1000]
 
 outputs:
   - id: output_file_txt
