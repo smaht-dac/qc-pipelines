@@ -25,14 +25,14 @@ category:
 #############################################################
 input:
 
-  # Required file argument
+  # Required file arguments
   input_file_bam:
     argument_type: file.bam
 
   genome_reference_fasta:
     argument_type: file.fa
 
-  # Optional parameter argument
+  # Optional parameter arguments
   chromosomes:
     # As a default, canonical chromosomes
     # will be extracted using GRCh38/hg38 chromosome names

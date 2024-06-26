@@ -19,19 +19,25 @@ category:
 #############################################################
 input:
 
-  # Required file argument
+  # Required file arguments
   input_file_bam:
     argument_type: file.bam
 
   genome_reference_fasta:
     argument_type: file.fa
 
+  # Optional file arguments
+  interval_list:
+    argument_type: file.interval_list
+
   # Optional parameter arguments
   minimum_base_quality:
     argument_type: parameter.integer
+    # default: 20
 
   minimum_mapping_quality:
     argument_type: parameter.integer
+    # default: 20
 
   read_length:
     argument_type: parameter.integer
@@ -40,6 +46,10 @@ input:
   count_unpaired:
     argument_type: parameter.boolean
     # default: false
+
+  coverage_cap:
+    argument_type: parameter.integer
+    # default: 1000
 
 ## Output information #######################################
 #     Output files and quality controls
