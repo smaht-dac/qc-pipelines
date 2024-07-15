@@ -21,7 +21,7 @@ inputs:
     doc: Input file in BAM format
 
   - id: effective_genome_size
-    type: int
+    type: long
     default: null
     inputBinding:
       prefix: -g
