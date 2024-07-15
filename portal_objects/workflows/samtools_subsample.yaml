@@ -1,0 +1,62 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: samtools_subsample
+description: Run Samtools to subsample input file in BAM format. |
+             Create index for the output file
+
+runner:
+  language: cwl
+  main: samtools_subsample.cwl
+
+software:
+  - Samtools@1.17
+
+category:
+  - Alignment Manipulation
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  # Optional file arguments
+  input_file_stats:
+    argument_type: file.txt
+    # Output from samtools stats.
+    # Required if coverage is used
+
+  # Required parameter arguments
+  subsample_fraction:
+    argument_type: parameter.float
+  # OR (coverage or subsample_fraction is required)
+  coverage:
+    argument_type: parameter.integer
+
+  # Optional parameter arguments
+  subsample_seed:
+    argument_type: parameter.integer
+    # default: 0
+
+  effective_genome_size:
+    argument_type: parameter.integer
+    # default: 2913022398
+
+  nthreads:
+    argument_type: parameter.integer
+    # default: 0
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_bam:
+    argument_type: file.bam
+    secondary_files:
+      - bam_bai

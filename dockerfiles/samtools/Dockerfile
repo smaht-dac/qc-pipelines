@@ -8,9 +8,11 @@ LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Mazie
 #######################################################################
 #     General updates & installing necessary Linux components
 #       - libncurses-dev, libbz2-dev, liblzma-dev used by samtools
+#       - bc is required by samtools_subsample.sh
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
+    bc \
     tabix=1.13+ds-2build1 \
     libncurses-dev=6.3-2 \
     libbz2-dev=1.0.8-5build1 \
@@ -45,6 +47,13 @@ RUN ./configure && \
 WORKDIR /usr/local/bin/
 
 RUN ln -s samtools-1.17 samtools
+
+#######################################################################
+#     Scripts
+#######################################################################
+## samtools_subsample
+COPY samtools_subsample.sh .
+RUN chmod +x samtools_subsample.sh
 
 #######################################################################
 #     Updating env
