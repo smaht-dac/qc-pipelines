@@ -63,6 +63,9 @@ input:
   BAMSTATS_OUTPUT:
     argument_type: file.txt
 
+  # Optional QC ruleset arguments
+  qc_ruleset:
+    argument_type: qc_ruleset.object
 
 ## Output information #######################################
 #     Output files and quality controls
