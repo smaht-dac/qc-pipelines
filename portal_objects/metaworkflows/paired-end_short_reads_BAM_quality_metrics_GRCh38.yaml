@@ -44,13 +44,25 @@ input:
     value: 150
 
   # QC ruleset argument
-  qc_ruleset_VerifyBamID2:
+  qc_ruleset:
     argument_type: qc_ruleset.object
     qc_thresholds:
       freemix_alpha:
         rule: Estimate of Contamination [VerifyBamID2]|<|0.01|0.03
         flag: True
-    qc_rule: "{freemix_alpha}"
+      duplicates:
+        rule: Percentage of Reads Duplicated [Samtools]|<|8|100
+        flag: True
+      mapped:
+        rule: Percentage of Reads Mapped [Samtools]|>|99|0
+        flag: True
+      mapped_proper_pairs:
+        rule: Percentage of Properly Paired Reads [Samtools]|>|96|0
+        flag: True
+      mismatch_rate:
+        rule: Aligned Bases Mismatch Rate [Picard]|<|0.008|1
+        flag: True
+    qc_rule: "{freemix_alpha} and {duplicates} and {mapped} and {mapped_proper_pairs} and {mismatch_rate}"
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
@@ -293,9 +305,15 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_files_bam
         scatter: 1
+        # extracts selected chromosomes
+        # and the processing is sequential
+        mount: True
 
       genome_reference_fasta:
         argument_type: file.fa
+
+      nthreads:
+        argument_type: parameter.integer
 
     ## Output ##########################
     ####################################
@@ -402,6 +420,9 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_files_bam
         scatter: 1
+        # only processes chromosome 22
+        # and the processing is sequential
+        mount: True
 
       genome_reference_fasta:
         argument_type: file.fa
@@ -684,7 +705,6 @@ workflows:
       # QC ruleset arguments
       qc_ruleset:
         argument_type: qc_ruleset.object
-        source_argument_name: qc_ruleset_VerifyBamID2
 
     ## Output ##########################
     ####################################

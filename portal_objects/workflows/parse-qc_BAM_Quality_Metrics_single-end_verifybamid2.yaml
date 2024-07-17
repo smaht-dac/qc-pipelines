@@ -1,0 +1,88 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: parse-qc_BAM_Quality_Metrics_single-end_verifybamid2
+description: Run parse-qc to generate quality metrics for single-end reads. |
+             Implementation to generate metrics for a BAM file. |
+             Support for VerifyBamID2 metrics
+
+runner:
+  language: cwl
+  main: parse-qc_BAM_Quality_Metrics_single-end_verifybamid2.cwl
+
+software:
+  - qc-parser@in_dev
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+    # this file is actually not used by the code but is needed
+    #   to specify where the quality metrics object need to be linked
+
+  # Files to load
+  SAMTOOLS_stats_OUTPUT:
+    argument_type: file.txt
+
+  SAMTOOLS_flagstat_OUTPUT:
+    argument_type: file.txt
+
+  SAMTOOLS_idxstats_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectAlignmentSummaryMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectBaseDistributionByCycle_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectBaseDistributionByCycle_PDF:
+    argument_type: file.pdf
+
+  PICARD_CollectGcBiasMetrics_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_CollectGcBiasMetrics_SUMMARY:
+    argument_type: file.txt
+
+  PICARD_CollectGcBiasMetrics_PDF:
+    argument_type: file.pdf
+
+  PICARD_MeanQualityByCycle_OUTPUT:
+    argument_type: file.txt
+
+  PICARD_MeanQualityByCycle_PDF:
+    argument_type: file.pdf
+
+  BAMSTATS_OUTPUT:
+    argument_type: file.txt
+
+  VERIFYBAMID2_OUTPUT:
+    argument_type: file.txt
+
+  # Optional QC ruleset arguments
+  qc_ruleset:
+    argument_type: qc_ruleset.object
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # QC output
+  qc_values_json:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    json: True
+
+  metrics_zip:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    zipped: True
