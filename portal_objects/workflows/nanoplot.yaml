@@ -20,7 +20,7 @@ category:
 #############################################################
 input:
 
-  # Required file argument
+  # Required file arguments
   input_file:
     # FASTQ or unmapped BAM (uBAM)
     argument_type: file.any

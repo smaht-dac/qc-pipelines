@@ -1,15 +1,16 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: bamstats
-description: Run bamStats.py script to calculate quality metrics for input file in BAM format
+name: verifybamid2
+description: Run VerifyBamID2 on input file in BAM format |
+             to check for contamination and sample mix-up
 
 runner:
   language: cwl
-  main: bamstats.cwl
+  main: verifybamid2.cwl
 
 software:
-  - Samtools@1.17
+  - VerifyBamID2@2.0.1
 
 category:
   - Quality Control
@@ -23,8 +24,14 @@ input:
   input_file_bam:
     argument_type: file.bam
 
+  genome_reference_fasta:
+    argument_type: file.fa
+
+  resources_vb2:
+    argument_type: file.vb2
+
   # Optional parameter arguments
-  effective_genome_size:
+  nthreads:
     argument_type: parameter.integer
 
 ## Output information #######################################

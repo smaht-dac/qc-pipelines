@@ -10,7 +10,7 @@ LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Mazie
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
-    libncurses-dev=6.3-2 \
+    tabix=1.13+ds-2build1 \
     --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -28,7 +28,8 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 #     Software
 #######################################################################
-## Install qc-parser
-RUN pip install qc-parser==0.2.1
+## Conda install
+RUN conda install -c bioconda -y verifybamid2==2.0.1 && \
+    conda clean -a -y -f
 
 CMD ["bash"]

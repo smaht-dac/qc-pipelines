@@ -1,13 +1,14 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: parse-qc_BAM_Quality_Metrics_single-end
+name: parse-qc_BAM_Quality_Metrics_single-end_verifybamid2
 description: Run parse-qc to generate quality metrics for single-end reads. |
-             Implementation to generate metrics for a BAM file
+             Implementation to generate metrics for a BAM file. |
+             Support for VerifyBamID2 metrics
 
 runner:
   language: cwl
-  main: parse-qc_BAM_Quality_Metrics_single-end.cwl
+  main: parse-qc_BAM_Quality_Metrics_single-end_verifybamid2.cwl
 
 software:
   - qc-parser@in_dev
@@ -61,6 +62,9 @@ input:
     argument_type: file.pdf
 
   BAMSTATS_OUTPUT:
+    argument_type: file.txt
+
+  VERIFYBAMID2_OUTPUT:
     argument_type: file.txt
 
   # Optional QC ruleset arguments

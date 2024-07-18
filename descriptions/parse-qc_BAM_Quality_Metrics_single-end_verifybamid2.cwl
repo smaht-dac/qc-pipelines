@@ -26,12 +26,6 @@ requirements:
         entryname: picard.CollectGcBiasMetrics.summary.txt
       - entry: $(inputs.PICARD_CollectGcBiasMetrics_PDF)
         entryname: picard.CollectGcBiasMetrics.pdf
-      - entry: $(inputs.PICARD_CollectInsertSizeMetrics_OUTPUT)
-        entryname: picard.CollectInsertSizeMetrics.txt
-      - entry: $(inputs.PICARD_CollectInsertSizeMetrics_PDF)
-        entryname: picard.CollectInsertSizeMetrics.pdf
-      - entry: $(inputs.PICARD_CollectWgsMetrics_OUTPUT)
-        entryname: picard.CollectWgsMetrics.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_OUTPUT)
         entryname: picard.MeanQualityByCycle.txt
       - entry: $(inputs.PICARD_MeanQualityByCycle_PDF)
@@ -86,46 +80,18 @@ inputs:
       position: 5
   # ------------------------------
 
-  #  picard_CollectInsertSizeMetrics
-  - id: metrics_picard_CollectInsertSizeMetrics
-    type: string
-    default: "picard_CollectInsertSizeMetrics"
-    inputBinding:
-      prefix: --metrics
-      position: 6
-
-  - id: PICARD_CollectInsertSizeMetrics_OUTPUT
-    type: File
-    inputBinding:
-      position: 7
-  # ------------------------------
-
-  #  picard_CollectWgsMetrics
-  - id: metrics_picard_CollectWgsMetrics
-    type: string
-    default: "picard_CollectWgsMetrics"
-    inputBinding:
-      prefix: --metrics
-      position: 8
-
-  - id: PICARD_CollectWgsMetrics_OUTPUT
-    type: File
-    inputBinding:
-      position: 9
-  # ------------------------------
-
   #  bamstats
   - id: metrics_bamstats
     type: string
     default: "bamstats"
     inputBinding:
       prefix: --metrics
-      position: 10
+      position: 6
 
   - id: BAMSTATS_OUTPUT
     type: File
     inputBinding:
-      position: 11
+      position: 7
   # ------------------------------
 
   #  verifybamid2
@@ -134,73 +100,67 @@ inputs:
     default: "verifybamid2"
     inputBinding:
       prefix: --metrics
-      position: 12
+      position: 8
 
   - id: VERIFYBAMID2_OUTPUT
     type: File
     inputBinding:
-      position: 13
+      position: 9
   # ------------------------------
 
   - id: SAMTOOLS_flagstat_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 14
+      position: 10
 
   - id: SAMTOOLS_idxstats_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 15
+      position: 11
 
   - id: PICARD_CollectBaseDistributionByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 16
+      position: 12
 
   - id: PICARD_CollectBaseDistributionByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 17
+      position: 13
 
   - id: PICARD_CollectGcBiasMetrics_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 18
+      position: 14
 
   - id: PICARD_CollectGcBiasMetrics_SUMMARY
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 19
+      position: 15
 
   - id: PICARD_CollectGcBiasMetrics_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 20
-
-  - id: PICARD_CollectInsertSizeMetrics_PDF
-    type: File
-    inputBinding:
-      prefix: --additional-files
-      position: 21
+      position: 16
 
   - id: PICARD_MeanQualityByCycle_OUTPUT
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 22
+      position: 17
 
   - id: PICARD_MeanQualityByCycle_PDF
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 23
+      position: 18
 
 outputs:
   - id: qc_values_json
@@ -215,4 +175,5 @@ outputs:
 
 doc: |
     Run parse-qc to generate quality metrics for input BAM file. |
-    Implementation for paired-end reads
+    Implementation for single-end reads. |
+    Support for VerifyBamID2 metrics

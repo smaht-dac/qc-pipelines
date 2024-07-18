@@ -1,18 +1,19 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: picard_CollectWgsMetrics
-description: Run Picard CollectWgsMetrics command
+name: samtools_subsample
+description: Run Samtools to subsample input file in BAM format. |
+             Create index for the output file
 
 runner:
   language: cwl
-  main: picard_CollectWgsMetrics.cwl
+  main: samtools_subsample.cwl
 
 software:
-  - Picard@3.0.0
+  - Samtools@1.17
 
 category:
-  - Quality Control
+  - Alignment Manipulation
 
 ## Input information ########################################
 #     Input files and parameters
@@ -23,33 +24,31 @@ input:
   input_file_bam:
     argument_type: file.bam
 
-  genome_reference_fasta:
-    argument_type: file.fa
-
   # Optional file arguments
-  interval_list:
-    argument_type: file.interval_list
+  input_file_stats:
+    argument_type: file.txt
+    # Output from samtools stats.
+    # Required if coverage is used
+
+  # Required parameter arguments
+  subsample_fraction:
+    argument_type: parameter.float
+  # OR (coverage or subsample_fraction is required)
+  coverage:
+    argument_type: parameter.integer
 
   # Optional parameter arguments
-  minimum_base_quality:
+  subsample_seed:
     argument_type: parameter.integer
-    # default: 20
+    # default: 0
 
-  minimum_mapping_quality:
+  effective_genome_size:
     argument_type: parameter.integer
-    # default: 20
+    # default: 2913022398
 
-  read_length:
+  nthreads:
     argument_type: parameter.integer
-    # default: 150
-
-  count_unpaired:
-    argument_type: parameter.boolean
-    # default: false
-
-  coverage_cap:
-    argument_type: parameter.integer
-    # default: 1000
+    # default: 0
 
 ## Output information #######################################
 #     Output files and quality controls
@@ -57,5 +56,7 @@ input:
 output:
 
   # File output
-  output_file_txt:
-    argument_type: file.txt
+  output_file_bam:
+    argument_type: file.bam
+    secondary_files:
+      - bam_bai

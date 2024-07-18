@@ -16,7 +16,7 @@ category:
 #############################################################
 input:
 
-  # Required file argument
+  # Required file arguments
   input_tar_gz:
     argument_type: file.tar_gz
 

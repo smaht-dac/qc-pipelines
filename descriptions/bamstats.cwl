@@ -20,6 +20,14 @@ inputs:
       prefix: -b
     doc: Input file in BAM format
 
+  - id: effective_genome_size
+    type: long
+    default: null
+    inputBinding:
+      prefix: -g
+    doc: Effective genome size. |
+         As a default it is used GRCh38/hg38 [2913022398]
+
 outputs:
   - id: output_file_txt
     type: File

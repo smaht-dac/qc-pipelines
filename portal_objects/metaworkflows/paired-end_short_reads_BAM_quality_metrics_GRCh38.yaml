@@ -24,6 +24,16 @@ input:
     files:
       - complete-reference-fasta-no-alt@GCA_000001405.15_GRCh38_no_decoy
 
+  interval_list:
+    argument_type: file.interval_list
+    files:
+      - picard-chr22-interval-list@GCA_000001405.15_GRCh38_no_decoy
+
+  resources_vb2:
+    argument_type: file.vb2
+    files:
+      - verifybamid2-resources-1000g-100k@GRCh38
+
   # Parameter argument
   nthreads:
     argument_type: parameter.integer
@@ -33,8 +43,26 @@ input:
     argument_type: parameter.integer
     value: 150
 
-  # TODO
-  # qc_ruleset
+  # QC ruleset argument
+  qc_ruleset:
+    argument_type: qc_ruleset.object
+    qc_thresholds:
+      freemix_alpha:
+        rule: Estimate of Contamination [VerifyBamID2]|<|0.01|0.03
+        flag: True
+      duplicates:
+        rule: Percentage of Reads Duplicated [Samtools]|<|8|100
+        flag: True
+      mapped:
+        rule: Percentage of Reads Mapped [Samtools]|>|99|0
+        flag: True
+      mapped_proper_pairs:
+        rule: Percentage of Properly Paired Reads [Samtools]|>|96|0
+        flag: True
+      mismatch_rate:
+        rule: Aligned Bases Mismatch Rate [Picard]|<|0.008|1
+        flag: True
+    qc_rule: "{freemix_alpha} and {duplicates} and {mapped} and {mapped_proper_pairs} and {mismatch_rate}"
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
@@ -277,9 +305,15 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_files_bam
         scatter: 1
+        # extracts selected chromosomes
+        # and the processing is sequential
+        mount: True
 
       genome_reference_fasta:
         argument_type: file.fa
+
+      nthreads:
+        argument_type: parameter.integer
 
     ## Output ##########################
     ####################################
@@ -318,7 +352,7 @@ workflows:
         - m5.large
         - m6i.large
         - m6a.large
-      ebs_size: "1.1x"
+      ebs_size: "3x"
       ebs_optimized: True
       spot_instance: True
       run_name: run_picard_CollectGcBiasMetrics
@@ -386,9 +420,15 @@ workflows:
         argument_type: file.bam
         source_argument_name: input_files_bam
         scatter: 1
+        # only processes chromosome 22
+        # and the processing is sequential
+        mount: True
 
       genome_reference_fasta:
         argument_type: file.fa
+
+      interval_list:
+        argument_type: file.interval_list
 
       # Parameter arguments
       read_length:
@@ -416,6 +456,8 @@ workflows:
         - r5a.2xlarge
         - r6i.2xlarge
         - r6a.2xlarge
+        - r7i.2xlarge
+        - r7a.2xlarge
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: False
@@ -514,6 +556,57 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
+  verifybamid2:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+      resources_vb2:
+        argument_type: file.vb2
+
+      # Parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        description: VerifyBamID2 output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.large
+        - m5.large
+        - m6i.large
+        - m6a.large
+      ebs_size: "1.1x"
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_verifybamid2
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
   parse-qc_BAM_Quality_Metrics_paired-end:
 
     ## Specific arguments ##############
@@ -603,6 +696,15 @@ workflows:
         argument_type: file.txt
         source: bamstats
         source_argument_name: output_file_txt
+
+      VERIFYBAMID2_OUTPUT:
+        argument_type: file.txt
+        source: verifybamid2
+        source_argument_name: output_file_txt
+
+      # QC ruleset arguments
+      qc_ruleset:
+        argument_type: qc_ruleset.object
 
     ## Output ##########################
     ####################################
