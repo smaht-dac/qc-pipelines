@@ -297,6 +297,9 @@ workflows:
       genome_reference_fasta:
         argument_type: file.fa
 
+      nthreads:
+        argument_type: parameter.integer
+
     ## Output ##########################
     ####################################
     output:
