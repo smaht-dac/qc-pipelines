@@ -42,7 +42,7 @@ def check_tags_in_file(file: str, tags: list, threads: int = 1) -> None:
 
     try:
         with pysam.AlignmentFile(file, 'rb', threads=threads, check_sq=False) as samfile:
-            for read in samfile.fetch():
+            for read in samfile:
                 tags_ = {tag_val[0] for tag_val in read.get_tags()}
                 tags_set.difference_update(tags_)
                 if not tags_set:
