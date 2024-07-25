@@ -78,7 +78,7 @@ if __name__ == '__main__':
                         help='Input BAM file', required=True)
     parser.add_argument('-l', '--tags',
                         help='List of tags to check', required=True, nargs='+')
-    parser.add_argument('-t', '--threads', default=1,
+    parser.add_argument('-t', '--threads', default=1, type=int,
                         help='Number of threads to use for compression/decompression [1]', required=False)
 
     args = vars(parser.parse_args())
