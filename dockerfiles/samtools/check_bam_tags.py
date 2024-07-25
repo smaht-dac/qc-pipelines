@@ -41,17 +41,18 @@ def check_tags_in_file(file: str, tags: list, threads: int = 1) -> None:
     tags_set = set(tags)
 
     try:
-        with pysam.AlignmentFile(file, 'rb', threads=threads) as samfile:
+        with pysam.AlignmentFile(file, 'rb', threads=threads, check_sq=False) as samfile:
             for read in samfile.fetch():
                 tags_ = {tag_val[0] for tag_val in read.get_tags()}
                 tags_set.difference_update(tags_)
                 if not tags_set:
+                    sys.stdout.write('\nAll tags found\n')
                     break
 
         if tags_set:
-            sys.exit('Missing tags: ' + ' '.join(tags_set))
+            sys.exit('\nMissing tags: ' + ' '.join(tags_set))
     except Exception as e:
-        sys.exit(f'Error processing file: {e}')
+        sys.exit(f'\nError processing file: {e}')
 
 
 def main(args: dict) -> None:
