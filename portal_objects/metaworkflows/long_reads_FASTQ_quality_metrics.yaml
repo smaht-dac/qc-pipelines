@@ -19,6 +19,14 @@ input:
     argument_type: file.any
     dimensionality: 1
 
+  kraken2_database:
+    argument_type: file.zip
+
+  # Parameter argument
+  nthreads:
+    argument_type: parameter.integer
+    value: 1
+
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
 #############################################################
@@ -73,6 +81,52 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
+  kraken2:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_fastq_r1:
+        argument_type: file.fastq_gz
+        source_argument_name: input_files
+        scatter: 1
+
+      database:
+        argument_type: file.zip
+        source_argument_name: kraken2_database
+
+      nthreads:
+        argument_type: parameter.integer
+        source_argument_name: nthreads
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        description: Kraken2 output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - r5.xlarge
+      ebs_size: '1.5x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_kraken2
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
   parse-qc_NanoPlot_Quality_Metrics:
 
     ## Specific arguments ##############
@@ -96,6 +150,11 @@ workflows:
       nanoplot_metrics_txt:
         argument_type: file.txt
         source: nanoplot
+        source_argument_name: output_file_txt
+
+      kraken2_output_txt:
+        argument_type: file.txt
+        source: kraken2
         source_argument_name: output_file_txt
 
     ## Output ##########################
@@ -126,5 +185,5 @@ workflows:
       ebs_size: 10
       ebs_optimized: True
       spot_instance: True
-      run_name: run_parse-qc_NanoPlot_Quality_Metrics
+      run_name: run_parse-qc_NanoPlot_Kraken2_Quality_Metrics
       behavior_on_capacity_limit: wait_and_retry
