@@ -19,6 +19,11 @@ input:
     argument_type: file.fastq_gz
     dimensionality: 2
 
+  kraken2_db:
+    argument_type: file.tar_gz
+    files:
+      - kraken22_standard_16gb_20240605
+
   # Parameter argument
   nthreads:
     argument_type: parameter.integer
@@ -168,6 +173,51 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
+  kraken2:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_fastq_gz:
+        argument_type: file.fastq_gz
+        source_argument_name: input_files_fastq_gz
+        scatter: 2
+
+      database:
+        argument_type: file.tar_gz
+        source_argument_name: kraken2_db
+
+      # Parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      output_file_txt:
+        description: Kraken2 sample report output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - r5.xlarge
+      ebs_size: '3x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_kraken2
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
   parse-qc_FastQC_Quality_Metrics:
 
     ## Specific arguments ##############
@@ -192,6 +242,11 @@ workflows:
         argument_type: file.txt
         source: fastqc
         source_argument_name: output_summary_txt
+
+      kraken2_report_txt:
+        argument_type: file.txt
+        source: kraken2
+        source_argument_name: output_file_txt
 
     ## Output ##########################
     ####################################
@@ -221,5 +276,5 @@ workflows:
       ebs_size: 10
       ebs_optimized: True
       spot_instance: True
-      run_name: run_parse-qc_FastQC_Quality_Metrics
+      run_name: run_parse-qc_FastQC_Kraken2_Quality_Metrics
       behavior_on_capacity_limit: wait_and_retry

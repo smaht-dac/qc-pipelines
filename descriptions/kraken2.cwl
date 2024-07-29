@@ -14,20 +14,12 @@ hints:
 baseCommand: [run.sh]
 
 inputs:
-  - id: input_file_fastq_r1
+  - id: input_file_fastq_gz
     type: File
     inputBinding:
       position: 1
     doc: Input file. |
-         Compressed FASTQ file (Single-end or paired-end R1)
-    
-  - id: input_file_fastq_r2
-    type: File
-    default: null
-    inputBinding:
-      position: 2
-    doc: Input file. |
-         Compressed FASTQ file (R2)
+         Compressed FASTQ file
 
   - id: database
     type: File

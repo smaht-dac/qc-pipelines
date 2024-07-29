@@ -19,8 +19,10 @@ input:
     argument_type: file.any
     dimensionality: 1
 
-  kraken2_database:
-    argument_type: file.zip
+  kraken2_db:
+    argument_type: file.tar_gz
+    files:
+      - kraken22_standard_16gb_20240605
 
   # Parameter argument
   nthreads:
@@ -88,26 +90,25 @@ workflows:
     input:
 
       # File arguments
-      input_file_fastq_r1:
+      input_file_fastq_gz:
         argument_type: file.fastq_gz
         source_argument_name: input_files
         scatter: 1
 
       database:
-        argument_type: file.zip
-        source_argument_name: kraken2_database
+        argument_type: file.tar_gz
+        source_argument_name: kraken2_db
 
+      # Parameter arguments
       nthreads:
         argument_type: parameter.integer
-        source_argument_name: nthreads
 
     ## Output ##########################
     ####################################
     output:
 
-      # File output
       output_file_txt:
-        description: Kraken2 output TXT
+        description: Kraken2 sample report output TXT
         data_category:
           - Quality Control
         data_type:
@@ -119,7 +120,7 @@ workflows:
     config:
       instance_type:
         - r5.xlarge
-      ebs_size: '1.5x'
+      ebs_size: '3x'
       ebs_optimized: True
       spot_instance: True
       run_name: run_kraken2

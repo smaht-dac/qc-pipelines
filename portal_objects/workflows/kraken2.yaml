@@ -2,7 +2,7 @@
 #     General information for the workflow
 #############################################################
 name: kraken2
-description: Run Kraken2 on paired, compressed FASTQ files.
+description: Run Kraken2 on compressed FASTQ files.
 
 runner:
   language: cwl
@@ -19,10 +19,7 @@ category:
 #############################################################
 input:
 
-  input_file_fastq_r1:
-    argument_type: file.fastq_gz
-
-  input_file_fastq_r2:
+  input_file_fastq_gz:
     argument_type: file.fastq_gz
 
   database:

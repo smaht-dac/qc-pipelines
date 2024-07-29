@@ -1,0 +1,17 @@
+################################################################
+# Resource files for VerifyBamID2
+#   Generated from 1000 Genomes project data and released by the authors
+#   as part of the software package, 1000g.phase3.100k.b38.vcf.gz.dat
+#   https://github.com/Griffan/VerifyBamID/tree/master/resource
+################################################################
+name: kraken22_standard_16gb_20240605
+description: Prebuilt Kraken2 database from https://benlangmead.github.io/aws-indexes/k2 
+format: tar_gz
+version: GRCh38
+category:
+  - Quality Control
+type:
+  - Index
+# Required to enable sync with a reference bucket
+uuid: c9a09979-3bd1-455c-9320-f4e9f02d895d
+accession: SMAFI9LT4J8V
