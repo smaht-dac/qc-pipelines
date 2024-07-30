@@ -46,7 +46,9 @@ def check_tags_in_file(file: str, tags: list, threads: int = 1) -> None:
                 tags_ = {tag_val[0] for tag_val in read.get_tags()}
                 tags_set.difference_update(tags_)
                 if not tags_set:
-                    sys.stdout.write('\nAll tags found\n')
+                    with open('log.txt', 'w') as log:
+                        log.write('SUCCESS!\n')
+                    sys.stdout.write('\nAll tags found!\n')
                     break
 
         if tags_set:
