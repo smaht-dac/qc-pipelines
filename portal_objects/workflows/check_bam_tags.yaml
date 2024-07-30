@@ -1,0 +1,40 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: check_bam_tags
+description: Validate tags in input BAM file. |
+             Run check_bam_tags.py to check for the presence of required tags
+
+runner:
+  language: cwl
+  main: check_bam_tags.cwl
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  # Required parameter arguments
+  required_tags:
+    #e.g. ["MM", "ML"]
+    argument_type: parameter.array
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer  
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_log_txt:
+    argument_type: file.txt
