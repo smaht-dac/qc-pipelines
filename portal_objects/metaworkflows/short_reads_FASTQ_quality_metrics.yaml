@@ -97,7 +97,7 @@ workflows:
       input_file_fastq_gz:
         argument_type: file.fastq_gz
         source_argument_name: input_files_fastq_gz
-        scatter: 2
+        scatter: 1
 
       database:
         argument_type: file.tar_gz

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ################################################################################
-# This script runs Kraken2 on a single-end FASTQ file or paired-end FASTQ files
+# This script runs Kraken2 on a single FASTQ files
 # It returns the Kraken2 report, not the read-level classification
 ################################################################################
 
