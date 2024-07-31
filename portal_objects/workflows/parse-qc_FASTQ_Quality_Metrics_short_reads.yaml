@@ -1,13 +1,13 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: parse-qc_FastQC_Quality_Metrics
-description: Run parse-qc to generate quality metrics. |
+name: parse-qc_FASTQ_Quality_Metrics_short_reads
+description: Run parse-qc to generate quality metrics for short reads. |
              Implementation to generate metrics for a FASTQ file
 
 runner:
   language: cwl
-  main: parse-qc_FastQC_Quality_Metrics.cwl
+  main: parse-qc_FASTQ_Quality_Metrics_short_reads.cwl
 
 software:
   - qc-parser@in_dev
@@ -32,6 +32,10 @@ input:
 
   fastqc_report_zip:
     argument_type: file.zip
+
+  # Files to load
+  kraken2_report_txt:
+    argument_type: file.txt
 
 ## Output information #######################################
 #     Output files and quality controls

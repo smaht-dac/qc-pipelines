@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ################################################################################
-# This script runs Kraken2 on a single FASTQ files
+# This script runs Kraken2 on a single FASTQ file
 # It returns the Kraken2 report, not the read-level classification
 ################################################################################
 
@@ -55,4 +55,3 @@ kraken2 --threads $nthreads --use-names \
     --db db \
     --report kraken2_report.txt \
     $input_file_fastq > /dev/null
-

@@ -22,7 +22,7 @@ input:
   kraken2_db:
     argument_type: file.tar_gz
     files:
-      - kraken22_standard_16gb_20240605
+      - kraken2-standard-16gb@GRCh38_20240605
 
   # Parameter argument
   nthreads:
@@ -106,13 +106,14 @@ workflows:
       # Parameter arguments
       nthreads:
         argument_type: parameter.integer
+        value: 4
 
     ## Output ##########################
     ####################################
     output:
 
       output_file_txt:
-        description: Kraken2 sample report output TXT
+        description: Kraken2 output report TXT
         data_category:
           - Quality Control
         data_type:
@@ -124,7 +125,10 @@ workflows:
     config:
       instance_type:
         - r5.xlarge
-      ebs_size: '3x'
+        - r5a.xlarge
+        - r6a.xlarge
+        - r6i.xlarge
+      ebs_size: '2.1x'
       ebs_optimized: True
       spot_instance: True
       run_name: run_kraken2
@@ -132,7 +136,7 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  parse-qc_FastQC_Quality_Metrics:
+  parse-qc_FASTQ_Quality_Metrics_short_reads:
 
     ## Specific arguments ##############
     ####################################
@@ -190,5 +194,5 @@ workflows:
       ebs_size: 10
       ebs_optimized: True
       spot_instance: True
-      run_name: run_parse-qc_FastQC_Kraken2_Quality_Metrics
+      run_name: run_parse-qc_FASTQ_Quality_Metrics_short_reads
       behavior_on_capacity_limit: wait_and_retry

@@ -15,24 +15,73 @@ category:
 input:
 
   # File argument
-  input_files:
-    argument_type: file.any
+  input_files_bam:
+    argument_type: file.bam
     dimensionality: 1
 
   kraken2_db:
     argument_type: file.tar_gz
     files:
-      - kraken22_standard_16gb_20240605
+      - kraken2-standard-16gb@GRCh38_20240605
 
   # Parameter argument
   nthreads:
     argument_type: parameter.integer
-    value: 1
+    value: 4
+
+  required_tags:
+    argument_type: parameter.array
+    value: ["MM", "ML"]
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
 #############################################################
 workflows:
+
+  ## Workflow definition #####################
+  ############################################
+  check_bam_tags:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File argument
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+      required_tags:
+        argument_type: parameter.array
+
+      # Parameter argument
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_log_txt:
+        description: tags validation log
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.xlarge
+      ebs_size: '1.1x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_check_bam_tags
+      behavior_on_capacity_limit: wait_and_retry
 
   ## Workflow definition #####################
   ############################################
@@ -42,11 +91,20 @@ workflows:
     ####################################
     input:
 
-      # File arguments
+      # File argument
       input_file:
-        argument_type: file.any
-        source_argument_name: input_files
+        argument_type: file.bam
+        source_argument_name: input_files_bam
         scatter: 1
+
+      # check_bam_tags dependency
+      #   this is a fake dependency to force
+      #   nanoplot step to wait success of
+      #   check_bam_tags before start running
+      input_logs_txt:
+        argument_type: file.txt
+        source: check_bam_tags
+        source_argument_name: output_log_txt
 
     ## Output ##########################
     ####################################
@@ -83,6 +141,57 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
+  bam_to_fastq_single-end:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File argument
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+      # Parameter argument
+      nthreads:
+        argument_type: parameter.integer
+
+      # check_bam_tags dependency
+      #   this is a fake dependency to force
+      #   bam_to_fastq_single-end step to wait success of
+      #   check_bam_tags before start running
+      input_logs_txt:
+        argument_type: file.txt
+        source: check_bam_tags
+        source_argument_name: output_log_txt
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_fastq_gz:
+        description: reads FASTQ (from BAM)
+        data_category:
+          - Sequencing Reads
+        data_type:
+          - Unaligned Reads
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.xlarge
+      ebs_size: '3x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_bam_to_fastq_single-end
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
   kraken2:
 
     ## Specific arguments ##############
@@ -92,8 +201,8 @@ workflows:
       # File arguments
       input_file_fastq_gz:
         argument_type: file.fastq_gz
-        source_argument_name: input_files
-        scatter: 1
+        source: bam_to_fastq_single-end
+        source_argument_name: output_file_fastq_gz
 
       database:
         argument_type: file.tar_gz
@@ -108,7 +217,7 @@ workflows:
     output:
 
       output_file_txt:
-        description: Kraken2 sample report output TXT
+        description: Kraken2 output report TXT
         data_category:
           - Quality Control
         data_type:
@@ -120,7 +229,10 @@ workflows:
     config:
       instance_type:
         - r5.xlarge
-      ebs_size: '3x'
+        - r5a.xlarge
+        - r6a.xlarge
+        - r6i.xlarge
+      ebs_size: '2.5x'
       ebs_optimized: True
       spot_instance: True
       run_name: run_kraken2
@@ -128,7 +240,7 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  parse-qc_NanoPlot_Quality_Metrics:
+  parse-qc_FASTQ_Quality_Metrics_long_reads:
 
     ## Specific arguments ##############
     ####################################
@@ -136,8 +248,8 @@ workflows:
 
       # File arguments
       input_file:
-        argument_type: file.any
-        source_argument_name: input_files
+        argument_type: file.bam
+        source_argument_name: input_files_bam
         input_dimension: 1
         mount: True
         # this file is actually not used by the code but is needed
@@ -186,5 +298,5 @@ workflows:
       ebs_size: 10
       ebs_optimized: True
       spot_instance: True
-      run_name: run_parse-qc_NanoPlot_Kraken2_Quality_Metrics
+      run_name: run_parse-qc_FASTQ_Quality_Metrics_long_reads
       behavior_on_capacity_limit: wait_and_retry

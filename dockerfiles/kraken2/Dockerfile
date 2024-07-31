@@ -29,7 +29,7 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 #     Software
 #######################################################################
-## Kraken install
+## Kraken2 install
 RUN wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.3.zip && \
     unzip v2.1.3.zip
 
@@ -45,7 +45,7 @@ ENV PATH=/usr/local/bin/kraken2_installation/:$PATH
 #######################################################################
 #     Scripts
 #######################################################################
-
+## Kraken2 run
 COPY run.sh .
 RUN chmod +x run.sh
 
