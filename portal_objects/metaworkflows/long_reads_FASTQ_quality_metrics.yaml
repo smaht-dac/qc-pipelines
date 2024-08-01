@@ -33,6 +33,21 @@ input:
     argument_type: parameter.array
     value: ["MM", "ML"]
 
+  # QC ruleset argument
+  qc_ruleset:
+    argument_type: qc_ruleset.object
+    qc_thresholds:
+      kraken2_human:
+        rule: Percentage Human Sequences [Kraken2]|>|95|0
+        flag: True
+      kraken2_virus:
+        rule: Percentage Viral Sequences [Kraken2]|<|0.3|100
+        flag: True
+      kraken2_bacteria:
+        rule: Percentage Bacterial Sequences [Kraken2]|<|0.1|100
+        flag: True
+    qc_rule: "{kraken2_human} and {kraken2_virus} and {kraken2_bacteria}"
+
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
 #############################################################
@@ -269,6 +284,10 @@ workflows:
         argument_type: file.txt
         source: kraken2
         source_argument_name: output_file_txt
+
+      # QC ruleset arguments
+      qc_ruleset:
+        argument_type: qc_ruleset.object
 
     ## Output ##########################
     ####################################
