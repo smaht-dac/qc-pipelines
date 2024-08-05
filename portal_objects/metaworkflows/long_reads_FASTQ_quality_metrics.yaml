@@ -280,7 +280,7 @@ workflows:
         source: nanoplot
         source_argument_name: output_file_txt
 
-      kraken2_output_txt:
+      kraken2_report_txt:
         argument_type: file.txt
         source: kraken2
         source_argument_name: output_file_txt
