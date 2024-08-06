@@ -1,13 +1,13 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: parse-qc_NanoPlot_Quality_Metrics
+name: parse-qc_FASTQ_Quality_Metrics_long_reads
 description: Run parse-qc to generate quality metrics for long reads. |
              Implementation to generate metrics for a FASTQ or unaligned BAM file
 
 runner:
   language: cwl
-  main: parse-qc_NanoPlot_Quality_Metrics.cwl
+  main: parse-qc_FASTQ_Quality_Metrics_long_reads.cwl
 
 software:
   - qc-parser@in_dev
@@ -33,6 +33,14 @@ input:
 
   nanoplot_metrics_html:
     argument_type: file.html
+
+  # Files to load
+  kraken2_report_txt:
+    argument_type: file.txt
+
+  # Optional QC ruleset arguments
+  qc_ruleset:
+    argument_type: qc_ruleset.object
 
 ## Output information #######################################
 #     Output files and quality controls

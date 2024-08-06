@@ -12,6 +12,8 @@ requirements:
         entryname: fastqc.summary.txt
       - entry: $(inputs.fastqc_report_zip)
         entryname: fastqc.report.zip
+      - entry: $(inputs.kraken2_report_txt)
+        entryname: kraken2.report.txt
 
 hints:
   - class: DockerRequirement
@@ -23,7 +25,7 @@ inputs:
   # Input arguments
   - id: qm_name
     type: string
-    default: "FastQC Quality Metrics"
+    default: "FASTQ Quality Metrics"
     inputBinding:
       prefix: --qm-name
       position: 1
@@ -44,12 +46,26 @@ inputs:
       position: 3
   # ------------------------------
 
+  # kraken2
+  - id: metrics_kraken2
+    type: string
+    default: "kraken2"
+    inputBinding:
+      prefix: --metrics
+      position: 4
+
+  - id: kraken2_report_txt
+    type: File
+    inputBinding:
+      position: 5
+  # ------------------------------
+
   # Additional files to load
   - id: fastqc_report_zip
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 4
+      position: 6
 
 outputs:
   - id: qc_values_json
@@ -63,4 +79,5 @@ outputs:
       glob: "metrics.zip"
 
 doc: |
-    Run parse-qc to generate quality metrics for input FASTQ file
+    Run parse-qc to generate quality metrics for input FASTQ file. |
+    Iplementation for short reads using FastQC

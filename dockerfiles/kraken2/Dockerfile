@@ -3,15 +3,16 @@
 #######################################################################
 FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py38:0.0.1
 
-LABEL maintainers="Michele Berselli (berselli.michele@gmail.com), Dominika Maziec (dominika_maziec@hms.harvard.edu)"
+LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Berselli (berselli.michele@gmail.com)"
 
 #######################################################################
 #     General updates & installing necessary Linux components
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
-    libncurses-dev=6.3-2 \
-    --no-install-recommends \
+    build-essential \
+    libz-dev \
+    unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,7 +29,24 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 #     Software
 #######################################################################
-## Install qc-parser
-RUN pip install qc-parser==0.3.0
+## Kraken2 install
+RUN wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.3.zip && \
+    unzip v2.1.3.zip
+
+WORKDIR /usr/local/bin/kraken2-2.1.3
+RUN ./install_kraken2.sh /usr/local/bin/kraken2_installation
+WORKDIR /usr/local/bin
+
+#######################################################################
+#     Updating env
+#######################################################################
+ENV PATH=/usr/local/bin/kraken2_installation/:$PATH
+
+#######################################################################
+#     Scripts
+#######################################################################
+## Kraken2 run
+COPY run.sh .
+RUN chmod +x run.sh
 
 CMD ["bash"]
