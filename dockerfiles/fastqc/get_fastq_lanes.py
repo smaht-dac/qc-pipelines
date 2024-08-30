@@ -16,8 +16,15 @@
 ################################################
 #   Libraries
 ################################################
-import sys, argparse, os
+import sys, argparse
 import gzip
+import re
+
+################################################
+#   Global Variables
+################################################
+# Regular expression to match UMI sequence format
+reg = re.compile('^[NATCG\+]+$')
 
 ################################################
 #   Objects
@@ -28,7 +35,6 @@ class FASTQParser(object):
         '''
         '''
         self.inputfile = inputfile
-        self.parse_reads()
 
     class FASTQRead(object):
 
@@ -54,6 +60,21 @@ class FASTQParser(object):
             elif l == 5:
                 # Old style header
                 return '_'.join(qn_as_list[:2])
+            elif l == 8:
+                # This is a case where the UMI is included in the header
+                #
+                #   <instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos>:<UMI>
+                #   e.g. NDX550136:7:H2MTNBDXX:1:13302:3141:10799:AAGGATG+TCGGAGA
+                #        LH00195:128:227GTYLT4:4:1101:1138:1042:GACCCAAAT
+                #
+                #   We treat the header as a new style header
+
+                # Check UMI sequence format (8th field)
+                if reg.match(qn_as_list[7]):
+                    return '_'.join(qn_as_list[:4])
+                else:
+                    sys.exit('\nFORMAT ERROR: UMI format {0} not recognized\n'
+                            .format(qn_as_list[7]))
             else:
                 sys.exit('\nFORMAT ERROR: read format {0} not recognized\n'
                             .format(query_name))
@@ -102,13 +123,13 @@ def main(args):
     fastq_parser = FASTQParser(filename)
 
     # Read file
-    for i, read_obj in enumerate(fastq_parser.parse_reads()):
+    for read_obj in fastq_parser.parse_reads():
         lanes_set.add(read_obj.get_lane_illumina())
 
     # Write output
     with open(args['outputfile'], 'w') as fo:
         fo.write(f'#- {filename}\n')
-        fo.write('\n'.join(list(lanes_set)))
+        fo.write('\n'.join(sorted(list(lanes_set))))
         fo.write('\n')
 
 ################################################
