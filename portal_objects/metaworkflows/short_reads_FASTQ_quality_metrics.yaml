@@ -42,7 +42,10 @@ input:
       kraken2_bacteria:
         rule: Percentage Bacterial Sequences [Kraken2]|<|0.1|100
         flag: True
-    qc_rule: "{kraken2_human} and {kraken2_virus} and {kraken2_bacteria}"
+      sequence_length:
+        rule: Sequence Length [FastQC]|is_type|int|int
+        flag: True
+    qc_rule: "{kraken2_human} and {kraken2_virus} and {kraken2_bacteria} and {sequence_length}"
 
 ## Workflows and dependencies ###############################
 #     Information for the workflows and their dependencies
