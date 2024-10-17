@@ -1,13 +1,15 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: compare_lanes
-description: Run compare_lanes.py to compare lane identifiers |
-             across multiple files in FASTQ format checking for duplicates
+name: mosdepth
+description: Run mosdepth to calculate coverage for input file in BAM format
 
 runner:
   language: cwl
-  main: compare_lanes.cwl
+  main: mosdepth.cwl
+
+software:
+  - mosdepth@v0.3.9
 
 category:
   - Quality Control
@@ -18,8 +20,12 @@ category:
 input:
 
   # Required file arguments
-  input_files_txt:
-    argument_type: file.txt
+  input_file_bam:
+    argument_type: file.bam
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer
 
 ## Output information #######################################
 #     Output files and quality controls
@@ -27,5 +33,8 @@ input:
 output:
 
   # File output
-  output_log_txt:
+  output_file_txt:
+    argument_type: file.txt
+
+  output_summary_txt:
     argument_type: file.txt

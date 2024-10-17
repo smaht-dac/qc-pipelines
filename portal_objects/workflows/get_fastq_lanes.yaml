@@ -2,7 +2,7 @@
 #     General information for the workflow
 #############################################################
 name: get_fastq_lanes
-description: Run get_fastq_lanes.py to collect lane identifiers in input FASTQ file
+description: Run get_fastq_lanes.py to collect lane identifiers in input file in FASTQ format
 
 runner:
   language: cwl

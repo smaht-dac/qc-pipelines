@@ -67,6 +67,12 @@ input:
   VERIFYBAMID2_OUTPUT:
     argument_type: file.txt
 
+  MOSDEPTH_SUMMARY:
+    argument_type: file.txt
+
+  MOSDEPTH_OUTPUT:
+    argument_type: file.txt
+
   # Optional QC ruleset arguments
   qc_ruleset:
     argument_type: qc_ruleset.object

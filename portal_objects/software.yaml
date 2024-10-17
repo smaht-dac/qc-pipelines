@@ -53,3 +53,14 @@ version: v2.1.3
 source_url: https://github.com/DerrickWood/kraken2
 category:
   - Quality Control
+
+---
+
+################################################################
+# mosdepth, v0.3.9
+################################################################
+name: mosdepth
+version: v0.3.9
+source_url: https://github.com/brentp/mosdepth
+category:
+  - Quality Control

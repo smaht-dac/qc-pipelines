@@ -2,7 +2,7 @@
 #     General information for the workflow
 #############################################################
 name: kraken2
-description: Run Kraken2 on input FASTQ file
+description: Run Kraken2 on input file in FASTQ format
 
 runner:
   language: cwl
