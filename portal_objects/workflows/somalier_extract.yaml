@@ -1,0 +1,39 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: somalier_extract
+description: Run Somalier extract function on input file in BAM format
+
+runner:
+  language: cwl
+  main: somalier_extract.cwl
+
+software:
+  - Somalier@v0.2.19
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  variant_sites:
+    argument_type: file.vcf_gz
+
+  genome_reference_fasta:
+    argument_type: file.fa
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_somalier:
+    argument_type: file.somalier

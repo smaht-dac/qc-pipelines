@@ -1,0 +1,40 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: somalier_relate
+description: Run Somalier relate function on a specified set of .somalier files
+
+runner:
+  language: cwl
+  main: somalier_relate.cwl
+
+software:
+  - Somalier@v0.2.19
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_files_somalier:
+    argument_type: file.somalier
+
+  # Optional parameter arguments
+  threshold:
+    # Threshold for relatedness
+    # must be in range from 0 to 1
+    # default: >= 0.8
+    argument_type: parameter.float
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_tsv:
+    argument_type: file.tsv

@@ -22,7 +22,7 @@ inputs:
       - .bai
     inputBinding:
       prefix: -I
-    doc: Input file in BAM format
+    doc: Input file in BAM format with the corresponding index file
 
   - id: genome_reference_fasta
     type: File

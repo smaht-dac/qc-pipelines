@@ -1,0 +1,130 @@
+## Pipeline information #####################################
+#     General information for the pipeline
+#############################################################
+name: sample_identity_check
+description: Run Somalier to verify that a specified set of samples originates from the same individual. |
+             Accept a list of files in BAM format. |
+             Support files from different sequencing technologies for combined analysis
+
+category:
+  - Quality Control
+
+## General arguments ########################################
+#     Pipeline input, reference files, and general arguments
+#       define all arguments for the pipeline here
+#############################################################
+input:
+
+  # File argument
+  input_files_bam:
+    argument_type: file.bam
+    dimensionality: 1
+
+  genome_reference_fasta:
+    argument_type: file.fa
+    files:
+      - complete-reference-fasta-no-alt@GCA_000001405.15_GRCh38_no_decoy
+
+  variant_sites:
+    argument_type: file.vcf_gz
+    files:
+      - somalier-variant-sites@GRCh38_v0.2.19
+
+  # Parameter argument
+  threshold_relatedness:
+    # Threshold for relatedness
+    # must be in range from 0 to 1
+    argument_type: parameter.float
+    value: 0.8
+
+## Workflows and dependencies ###############################
+#     Information for the workflows and their dependencies
+#############################################################
+workflows:
+
+  ## Workflow definition #####################
+  ############################################
+  somalier_extract:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+      variant_sites:
+        argument_type: file.vcf_gz
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_somalier:
+        description: Somalier extract output SOMALIER
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.xlarge
+      ebs_size: '1.1x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_somalier_extract
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  somalier_relate:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_files_somalier:
+        argument_type: file.somalier
+        source: somalier_extract
+        source_argument_name: output_file_somalier
+        gather: 1
+
+      # Parameter arguments
+      threshold:
+        argument_type: parameter.float
+        source_argument_name: threshold_relatedness
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_tsv:
+        description: Somalier relate output TSV
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: '2x'
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_somalier_relate
+      behavior_on_capacity_limit: wait_and_retry
