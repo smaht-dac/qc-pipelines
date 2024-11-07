@@ -1,15 +1,16 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: somalier_relate
-description: Run Somalier relate function on a specified set of .somalier files
+name: parse-qc_Relatedness_Quality_Metrics
+description: Run parse-qc to generate quality metrics for input BAM file. |
+             Implementation for Somalier
 
 runner:
   language: cwl
-  main: somalier_relate.cwl
+  main: parse-qc_Relatedness_Quality_Metrics.cwl
 
 software:
-  - Somalier@v0.2.19
+  - qc-parser@in_dev
 
 category:
   - Quality Control
@@ -20,14 +21,21 @@ category:
 input:
 
   # Required file arguments
-  input_files_somalier:
-    argument_type: file.somalier
+  input_pairs_tsv:
+    argument_type: file.tsv
 
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################
 output:
 
-  # File output
-  output_pairs_tsv:
-    argument_type: file.tsv
+  # QC output
+  qc_values_json:
+    argument_type: qc
+    argument_to_be_attached_to: input_pairs_tsv
+    json: True
+
+  metrics_zip:
+    argument_type: qc
+    argument_to_be_attached_to: input_pairs_tsv
+    zipped: True

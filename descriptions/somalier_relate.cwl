@@ -20,28 +20,20 @@ inputs:
         items: File
         type: array
     inputBinding:
-      position: 3
+      position: 2
     doc: Expect a list of .somalier files |
          generated from corresponding BAM files |
          using Somalier extract function
-
-  - id: threshold
-    type: float
-    default: 0.8
-    inputBinding:
-      position: 1
-    doc: Threshold for relatedness |
-         must be in range from 0 to 1
 
   - id: output_prefix
     type: string
     default: "out"
     inputBinding:
-      position: 2
+      position: 1
     doc: Prefix for the output
 
 outputs:
-  - id: output_file_tsv
+  - id: output_pairs_tsv
     type: File
     outputBinding:
       glob: $(inputs.output_prefix).pairs.tsv
