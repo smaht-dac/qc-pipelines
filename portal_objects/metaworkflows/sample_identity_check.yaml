@@ -116,7 +116,6 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
-        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
