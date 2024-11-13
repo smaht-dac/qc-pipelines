@@ -68,3 +68,23 @@ type:
 # Required to enable sync with a reference bucket
 uuid: c9a09979-3bd1-455c-9320-f4e9f02d895d
 accession: SMAFI9LT4J8V
+
+---
+
+################################################################
+# Variant sites for Somalier
+#   VCF file released by the authors with Somalier v0.2.19
+#   https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz
+################################################################
+name: somalier-variant-sites
+description: Variant sites to extract, used by Somalier. |
+             Build hg38/GRCh38
+format: vcf_gz
+version: GRCh38_v0.2.19
+category:
+  - Germline Variant Calls
+type:
+  - Index
+# Required to enable sync with a reference bucket
+uuid: f056642f-33d5-46e0-a05d-7faea75bfc29
+accession: SMAFI9L345QJ
