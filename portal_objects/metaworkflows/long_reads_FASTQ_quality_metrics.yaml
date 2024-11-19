@@ -133,7 +133,6 @@ workflows:
         data_type:
           - Statistics
           - Image
-        s3_lifecycle_category: no_storage
 
       output_file_txt:
         description: NanoPlot output TXT
@@ -141,7 +140,6 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
-        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
@@ -237,7 +235,6 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
-        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
