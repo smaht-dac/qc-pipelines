@@ -1,0 +1,33 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: tissue_classifier
+description: Run the tissue classifier for RNA-Seq data to predict the tissue from RNA-SeQC output
+
+runner:
+  language: cwl
+  main: tissue_classifier.cwl
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  classifier:
+    argument_type: file.tar_gz
+
+  rnaseqc_output:
+    argument_type: file.tsv
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt
