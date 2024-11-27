@@ -52,20 +52,21 @@ def predict_input(expression_scaled, ml_model, label_encoder):
 
     probs_arr = []
     for t in sorted_p_mapping:
-        probs_arr.append(f"{t}\t{sorted_p_mapping[t]}")
+        probs_arr.append({
+            "tissue": t,
+            "probability": sorted_p_mapping[t]
+        })
     
     return probs_arr
 
 
 @click.command()
 @click.option(
-    "-c",
     "--classifier",
     required=True,
     help="Path to classifier source files from portal",
 )
 @click.option(
-    "-r",
     "--rnaseqc-output",
     required=True,
     help="Result of RNA-SeQC",
@@ -109,9 +110,9 @@ def main(classifier, rnaseqc_output):
     result = predict_input(model_input, ml_model, label_encoder)
 
     with open("output.txt", "w") as file:
-        file.write("# Predicted tissue\tProbability\n")
-        for item in result:
-            file.write(f"{item}\n")
+        for i, r in enumerate(result):
+            file.write(f"Predicted tissue {i+1}\t{r['tissue']}\n")
+            file.write(f"Probability predicted tissue {i+1}\t{r['probability']}\n")
 
 
 
