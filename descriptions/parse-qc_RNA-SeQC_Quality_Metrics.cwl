@@ -46,7 +46,6 @@ inputs:
       position: 3
   # ------------------------------
 
-  # Files to parse per metric type
   # tissue_classifier
   - id: metrics_tissue_classifier
     type: string
