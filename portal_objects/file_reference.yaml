@@ -92,14 +92,14 @@ accession: SMAFI9L345QJ
 ---
 
 ################################################################
-# Source files of the RNA-Seq tissue classiifer
+# Source files of the RNA-seq tissue classifier
 #   Includes random forest model, label encoder, scaler and gene list
 ################################################################
 name: tissue-classifier-model
-description: Source files of the RNA-Seq tissue classiifer |
+description: Source files of the RNA-seq tissue classifier. |
              Includes random forest model, label encoder, scaler and gene list 
 format: tar_gz
-version: Tissue_classifier_20241125
+version: v20241125
 category:
   - Quality Control
 type:

@@ -2,7 +2,7 @@
 #     General information for the workflow
 #############################################################
 name: tissue_classifier
-description: Run the tissue classifier for RNA-Seq data to predict the tissue from RNA-SeQC output
+description: Run the tissue classifier for RNA-seq data to predict the tissue from RNA-SeQC output
 
 runner:
   language: cwl

@@ -7,14 +7,10 @@ LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Bers
 
 #######################################################################
 #     General updates & installing necessary Linux components
-#       - libncurses-dev, libbz2-dev, liblzma-dev used by samtools
 #######################################################################
 RUN apt-get update -y && apt-get install -y \
     locales \
     tabix=1.13+ds-2build1 \
-    libncurses-dev=6.3-2 \
-    libbz2-dev=1.0.8-5build1 \
-    liblzma-dev=5.2.5-2ubuntu1 \
     --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -32,7 +28,6 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 #     Software
 #######################################################################
-
 ## Python dependencies
 RUN pip install click==8.1.7
 RUN pip install pandas==2.2.2
@@ -40,7 +35,7 @@ RUN pip install pandas==2.2.2
 #######################################################################
 #     Scripts
 #######################################################################
-
+## tissue_classifier_predict
 COPY tissue_classifier_predict.py .
 RUN chmod +x tissue_classifier_predict.py
 

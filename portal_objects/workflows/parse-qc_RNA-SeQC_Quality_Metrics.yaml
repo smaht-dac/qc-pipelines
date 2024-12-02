@@ -3,7 +3,8 @@
 #############################################################
 name: parse-qc_RNA-SeQC_Quality_Metrics
 description: Run parse-qc to generate quality metrics for input BAM file. |
-             Implementation for RNA-seq
+             Implementation for RNA-seq. |
+             Generate metrics for RNA-SeQC and Tissue Classifier
 
 runner:
   language: cwl
@@ -27,10 +28,13 @@ input:
     #   to specify where the quality metrics object need to be linked
 
   # Files to load
-  input_file_json:
+  input_rnaseqc_json:
     argument_type: file.json
 
-  input_tar_gz:
+  input_classifier_txt:
+    argument_type: file.txt
+
+  input_rnaseqc_tar_gz:
     argument_type: file.tar_gz
 
 ## Output information #######################################

@@ -8,10 +8,12 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - entry: $(inputs.input_file_json)
+      - entry: $(inputs.input_rnaseqc_json)
         entryname: rnaseqc.summary.json
-      - entry: $(inputs.input_tar_gz)
+      - entry: $(inputs.input_rnaseqc_tar_gz)
         entryname: rnaseqc.out.tar.gz
+      - entry: $(inputs.input_classifier_txt)
+        entryname: classifier.out.txt
 
 hints:
   - class: DockerRequirement
@@ -38,18 +40,33 @@ inputs:
       prefix: --metrics
       position: 2
 
-  - id: input_file_json
+  - id: input_rnaseqc_json
     type: File
     inputBinding:
       position: 3
   # ------------------------------
 
+  # Files to parse per metric type
+  # tissue_classifier
+  - id: metrics_tissue_classifier
+    type: string
+    default: "tissue_classifier"
+    inputBinding:
+      prefix: --metrics
+      position: 4
+
+  - id: input_classifier_txt
+    type: File
+    inputBinding:
+      position: 5
+  # ------------------------------
+
   # Additional files to load
-  - id: input_tar_gz
+  - id: input_rnaseqc_tar_gz
     type: File
     inputBinding:
       prefix: --additional-files
-      position: 4
+      position: 6
 
 outputs:
   - id: qc_values_json
@@ -64,4 +81,5 @@ outputs:
 
 doc: |
     Run parse-qc to generate quality metrics for input BAM file. |
-    Implementation for RNA-seq
+    Implementation for RNA-seq. |
+    Generate metrics for RNA-SeQC and Tissue Classifier
