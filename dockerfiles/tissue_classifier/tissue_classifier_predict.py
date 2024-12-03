@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import click, sys, subprocess, csv, pickle
 import pandas as pd
 

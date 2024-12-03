@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Download GTEX data from here: https://gtexportal.org/home/downloads/adult-gtex/bulk_tissue_expression
 
 # Prepare training data

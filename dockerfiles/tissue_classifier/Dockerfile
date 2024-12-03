@@ -30,7 +30,7 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 ## Python dependencies
 RUN pip install click==8.1.7
-RUN pip install pandas==2.2.2
+RUN pip install pandas==2.0.0
 
 #######################################################################
 #     Scripts
