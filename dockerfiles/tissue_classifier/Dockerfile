@@ -1,7 +1,7 @@
 #######################################################################
 #     Basic image
 #######################################################################
-FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py38:0.0.1
+FROM public.ecr.aws/smaht-dac/base-ubuntu2204-py39:0.0.1
 
 LABEL maintainers="Alexander Veit (alexander_veit@hms.harvard.edu), Michele Berselli (berselli.michele@gmail.com)"
 
@@ -30,7 +30,8 @@ ENV LC_ALL=en_US.UTF-8
 #######################################################################
 ## Python dependencies
 RUN pip install click==8.1.7
-RUN pip install pandas==2.0.0
+RUN pip install pandas==2.2.2
+RUN pip install scikit-learn==1.5.2
 
 #######################################################################
 #     Scripts

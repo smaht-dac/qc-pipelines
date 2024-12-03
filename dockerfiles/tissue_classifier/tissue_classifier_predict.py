@@ -64,11 +64,13 @@ def predict_input(expression_scaled, ml_model, label_encoder):
 
 @click.command()
 @click.option(
+    "-c",
     "--classifier",
     required=True,
     help="Path to classifier source files from portal",
 )
 @click.option(
+    "-r",
     "--rnaseqc-output",
     required=True,
     help="Result of RNA-SeQC",

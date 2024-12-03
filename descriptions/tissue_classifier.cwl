@@ -17,13 +17,13 @@ inputs:
   - id: classifier
     type: File
     inputBinding:
-      prefix: --classifier
+      prefix: -c
     doc: Compressed, trained random forest model
 
   - id: rnaseqc_output
     type: File
     inputBinding:
-      prefix: --rnaseqc-output
+      prefix: -r
     doc: Gene TPM output of RNA-SeQC
 
 outputs:
