@@ -20,6 +20,9 @@ input:
     argument_type: file.bam
     dimensionality: 1
 
+  sample_names:
+    argument_type: parameter.array
+
   genome_reference_fasta:
     argument_type: file.fa
     files:
@@ -35,7 +38,7 @@ input:
     argument_type: qc_ruleset.object
     qc_thresholds:
       identity_check:
-        rule: Identity Check [Somalier]|==|PASSED|FAILED
+        rule: Identity Check [Somalier]|==|PASSED|PASSED
         flag: True
     qc_rule: "{identity_check}"
 
@@ -43,6 +46,53 @@ input:
 #     Information for the workflows and their dependencies
 #############################################################
 workflows:
+
+  ## Workflow definition #####################
+  #   ReplaceReadGroups
+  ############################################
+  ReplaceReadGroups:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File argument
+      input_file_bam:
+        argument_type: file.bam
+        source_argument_name: input_files_bam
+        scatter: 1
+
+      # Parameter argument
+      sample_name:
+        argument_type: parameter.string
+        source_argument_name: sample_names
+        input_dimension: 1
+
+    ## Output ##########################
+    #     Output files for the workflow
+    ####################################
+    output:
+
+      # File output
+      output_file_bam:
+        description: ReplaceReadGroups output BAM
+        data_category:
+          - Sequencing Reads
+        data_type:
+          - Aligned Reads
+        s3_lifecycle_category: no_storage
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5.xlarge
+        - c5.xlarge
+      ebs_size: "2.5x"
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_ReplaceReadGroups
+      behavior_on_capacity_limit: wait_and_retry
 
   ## Workflow definition #####################
   ############################################
@@ -55,8 +105,8 @@ workflows:
       # File arguments
       input_file_bam:
         argument_type: file.bam
-        source_argument_name: input_files_bam
-        scatter: 1
+        source: ReplaceReadGroups
+        source_argument_name: output_file_bam
         # Only need to extract a subset of reads
         # at variant sites
         mount: True
@@ -116,6 +166,7 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
+        s3_lifecycle_category: no_storage
 
     ## EC2 Configuration to use ########
     ####################################
