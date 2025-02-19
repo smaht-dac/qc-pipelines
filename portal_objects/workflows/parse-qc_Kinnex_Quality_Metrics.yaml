@@ -1,0 +1,65 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: parse-qc_Kinnex_Quality_Metrics
+description: Run parse-qc to generate quality metrics for input BAM file. |
+             Implementation for Kinnex RNA-seq
+
+runner:
+  language: cwl
+  main: parse-qc_Kinnex_Quality_Metrics.cwl
+
+software:
+  - qc-parser@in_dev
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+    # this file is actually not used by the code but is needed
+    #   to specify where the quality metrics object need to be linked
+
+  # Files to load
+  SAMTOOLS_stats_OUTPUT:
+    argument_type: file.txt
+
+  PIGEON_filter_REPORT:
+    argument_type: file.json
+
+  PIGEON_filter_SUMMARY:
+    argument_type: file.txt
+
+  PIGEON_classify_REPORT:
+    argument_type: file.json
+
+  PIGEON_classify_SUMMARY:
+    argument_type: file.txt
+
+  ISOSEQ_collapse_REPORT:
+    argument_type: file.json
+
+  PIGEON_report_SATURATION:
+    argument_type: file.txt
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # QC output
+  qc_values_json:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    json: True
+
+  metrics_zip:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    zipped: True
