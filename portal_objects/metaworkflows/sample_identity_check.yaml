@@ -214,7 +214,6 @@ workflows:
           - Quality Control
         data_type:
           - Statistics
-          - Image
 
     ## EC2 Configuration to use ########
     ####################################
