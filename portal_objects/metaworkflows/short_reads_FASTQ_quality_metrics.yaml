@@ -143,6 +143,8 @@ workflows:
         - r5a.xlarge
         - r6a.xlarge
         - r6i.xlarge
+        - r7a.xlarge
+        - r7i.xlarge
       ebs_size: '2.1x'
       ebs_optimized: True
       spot_instance: True

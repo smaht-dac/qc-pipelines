@@ -86,8 +86,14 @@ workflows:
     ####################################
     config:
       instance_type:
-        - m5.xlarge
         - c5.xlarge
+        - c5a.xlarge
+        - m5.xlarge
+        - m5a.xlarge
+        - m6i.xlarge
+        - m6a.xlarge
+        - m7i.xlarge
+        - m7a.xlarge
       ebs_size: "2.5x"
       ebs_optimized: True
       spot_instance: True
