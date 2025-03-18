@@ -58,14 +58,14 @@ for filename in ${sorted_files[@]}; do
     if [[ "$filename" =~ (M\.mpileup)$ ]]; then
         chr_M=$filename
     else
-        cat $filename >> ${OUTPUT_PREFIX}.txt || exit 1
+        cat $filename >> ${OUTPUT_PREFIX}.tsv || exit 1
         rm -f $filename
     fi
 done
 
 if [[ -v "$chr_M" ]]; then
-    cat $chr_M >> ${OUTPUT_PREFIX}.txt || exit 1
+    cat $chr_M >> ${OUTPUT_PREFIX}.tsv || exit 1
     rm -f $chr_M
 fi
 
-echo "Processing completed! Output: ${OUTPUT_PREFIX}.txt"
+echo "Processing completed! Output: ${OUTPUT_PREFIX}.tsv"
