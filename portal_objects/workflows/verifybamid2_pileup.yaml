@@ -1,0 +1,44 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: verifybamid2_pileup
+description: Run VerifyBamID2 on input pileup file in TSV format |
+             to check for contamination and sample mix-up
+
+runner:
+  language: cwl
+  main: verifybamid2_pileup.cwl
+
+software:
+  - VerifyBamID2@2.0.1
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_pileup_tsv:
+    argument_type: file.tsv
+
+  genome_reference_fasta:
+    argument_type: file.fa
+
+  resources_vb2:
+    argument_type: file.vb2
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt

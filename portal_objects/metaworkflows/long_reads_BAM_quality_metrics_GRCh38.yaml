@@ -458,7 +458,7 @@ workflows:
 
       coverage:
         argument_type: parameter.integer
-        value: 20
+        value: 30
 
       # Parameter arguments
       nthreads:
@@ -516,6 +516,7 @@ workflows:
       # Parameter arguments
       nthreads:
         argument_type: parameter.integer
+        value: 4
 
     ## Output ##########################
     ####################################
@@ -533,11 +534,11 @@ workflows:
     ####################################
     config:
       instance_type:
-        - r5a.4xlarge
-        - r6a.4xlarge
-        - r6i.4xlarge
-        - r7a.4xlarge
-        - r7i.4xlarge
+        - r5a.2xlarge
+        - r6a.2xlarge
+        - r6i.2xlarge
+        - r7a.2xlarge
+        - r7i.2xlarge
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
