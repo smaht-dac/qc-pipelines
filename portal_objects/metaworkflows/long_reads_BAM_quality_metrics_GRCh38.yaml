@@ -487,7 +487,7 @@ workflows:
         - m6a.large
         - m7i.large
         - m7a.large
-      ebs_size: "2.1x"
+      ebs_size: "2.5x"
       ebs_optimized: True
       spot_instance: True
       run_name: run_samtools_subsample
@@ -534,11 +534,11 @@ workflows:
     ####################################
     config:
       instance_type:
-        - r5a.2xlarge
-        - r6a.2xlarge
-        - r6i.2xlarge
-        - r7a.2xlarge
-        - r7i.2xlarge
+        - r5a.xlarge
+        - r6a.xlarge
+        - r6i.xlarge
+        - r7a.xlarge
+        - r7i.xlarge
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: True
