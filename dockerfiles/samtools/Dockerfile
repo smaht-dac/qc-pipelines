@@ -60,6 +60,10 @@ RUN ln -s samtools-1.17 samtools
 COPY samtools_subsample.sh .
 RUN chmod +x samtools_subsample.sh
 
+## samtools_mpileup_regions
+COPY samtools_mpileup_regions.sh .
+RUN chmod +x samtools_mpileup_regions.sh
+
 ## check_bam_tags
 COPY check_bam_tags.py .
 RUN chmod +x check_bam_tags.py

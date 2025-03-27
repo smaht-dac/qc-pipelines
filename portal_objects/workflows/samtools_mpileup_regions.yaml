@@ -1,0 +1,45 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: samtools_mpileup_regions
+description: Run Samtools to generate pileup for input file in BAM format on a set of specified regions. |
+             Each region is processed in parallel and the output merged into a single pileup
+
+runner:
+  language: cwl
+  main: samtools_mpileup_regions.cwl
+
+software:
+  - Samtools@1.17
+
+category:
+  - Variant Calling
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  genome_reference_fasta:
+    argument_type: file.fa
+
+  regions:
+    argument_type: file.txt
+
+  # Optional parameter arguments
+  samtools_flags:
+    argument_type: parameter.string
+    # default: "-B -a -s -q 1"
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_pileup_tsv:
+    argument_type: file.tsv
