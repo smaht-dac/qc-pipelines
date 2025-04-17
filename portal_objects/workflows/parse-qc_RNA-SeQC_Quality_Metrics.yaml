@@ -34,6 +34,9 @@ input:
   input_classifier_txt:
     argument_type: file.txt
 
+  input_verifybamid2_txt:
+    argument_type: file.txt
+
   input_rnaseqc_tar_gz:
     argument_type: file.tar_gz
 

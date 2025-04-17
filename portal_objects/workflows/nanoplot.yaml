@@ -10,7 +10,7 @@ runner:
   main: nanoplot.cwl
 
 software:
-  - NanoPlot@1.42.0
+  - NanoPlot@1.44.1
 
 category:
   - Quality Control

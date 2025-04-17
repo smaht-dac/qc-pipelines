@@ -24,10 +24,10 @@ category:
 ---
 
 ################################################################
-# NanoPlot, 1.42.0
+# NanoPlot, 1.44.1
 ################################################################
 name: NanoPlot
-version: 1.42.0
+version: 1.44.1
 source_url: https://github.com/wdecoster/NanoPlot
 category:
   - Quality Control
