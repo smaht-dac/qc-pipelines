@@ -40,6 +40,10 @@ input:
   input_rnaseqc_tar_gz:
     argument_type: file.tar_gz
 
+  # Optional QC ruleset arguments
+  qc_ruleset:
+    argument_type: qc_ruleset.object
+
 ## Output information #######################################
 #     Output files and quality controls
 #############################################################
