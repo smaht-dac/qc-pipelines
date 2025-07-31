@@ -62,6 +62,9 @@ workflows:
         source_argument_name: input_files_bam
         scatter: 1
 
+      genome_reference_fasta:
+        argument_type: file.fa
+
       # Parameter arguments
       sample_name:
         argument_type: parameter.string
