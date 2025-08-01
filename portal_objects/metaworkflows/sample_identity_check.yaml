@@ -97,7 +97,7 @@ workflows:
         - m6a.xlarge
         - m7i.xlarge
         - m7a.xlarge
-      ebs_size: "2.5x"
+      ebs_size: "5.5x"
       ebs_optimized: True
       spot_instance: True
       run_name: run_ReplaceReadGroups
