@@ -30,6 +30,15 @@ ENV LC_ALL=en_US.UTF-8
 #     Software
 #######################################################################
 ## Python dependencies
+# This is a combination of versions that works:
+#   NanoPlot-1.44.1 biopython-1.83 nanoget-1.19.3 narwhals-1.42.1
+#   numpy-1.24.4 pandas-2.0.3 plotly-6.2.0 pyarrow-17.0.0 pysam-0.23.3
+#   pytz-2025.2 scipy-1.10.1 tzdata-2025.2 kaleido-0.2.1
+
+# kaleido >= 1.0.0 is not compatible with NanoPlot 1.44.1 (but NanoPlot will try to install it)
+RUN pip install kaleido==0.2.1
+
+## NanoPlot
 RUN pip install NanoPlot==1.44.1
 
 #######################################################################
