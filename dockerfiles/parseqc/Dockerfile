@@ -29,6 +29,6 @@ ENV LC_ALL=en_US.UTF-8
 #     Software
 #######################################################################
 ## Install qc-parser
-RUN pip install qc-parser==0.8.2
+RUN pip install qc-parser==0.8.3
 
 CMD ["bash"]
