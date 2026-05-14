@@ -1,0 +1,202 @@
+## Pipeline information #####################################
+#     General information for the pipeline
+#############################################################
+name: samtools_mosdepth_cram
+description: Calculate coverage and alignment statistics for input files in CRAM format
+
+category:
+  - Quality Control
+
+## General arguments ########################################
+#     Pipeline input, reference files, and general arguments
+#       define all arguments for the pipeline here
+#############################################################
+input:
+
+  # File argument
+  input_files_cram:
+    argument_type: file.cram
+    dimensionality: 1
+
+  genome_reference_fasta:
+    argument_type: file.fa
+    files:
+      - complete-reference-fasta-no-alt@GCA_000001405.15_GRCh38_no_decoy
+
+  # Parameter argument
+  nthreads:
+    argument_type: parameter.integer
+    value: 4
+
+## Workflows and dependencies ###############################
+#     Information for the workflows and their dependencies
+#############################################################
+workflows:
+
+  ## Workflow definition #####################
+  ############################################
+  samtools_stats_cram:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_cram:
+        argument_type: file.cram
+        source_argument_name: input_files_cram
+        scatter: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+      # Parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_file_txt:
+        description: samtools stats output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.xlarge
+        - m5.xlarge
+        - m6i.xlarge
+        - m6a.xlarge
+        - m7i.xlarge
+        - m7a.xlarge
+      ebs_size: "1.1x"
+      ebs_optimized: True
+      spot_instance: False
+      run_name: run_samtools_stats_cram
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  mosdepth_cram:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_cram:
+        argument_type: file.cram
+        source_argument_name: input_files_cram
+        scatter: 1
+
+      genome_reference_fasta:
+        argument_type: file.fa
+
+      # Parameter arguments
+      nthreads:
+        argument_type: parameter.integer
+        value: 4
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      output_summary_txt:
+        description: mosdepth summary TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+      output_file_txt:
+        description: mosdepth output TXT
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - m5a.xlarge
+        - m5.xlarge
+        - m6i.xlarge
+        - m6a.xlarge
+        - m7i.xlarge
+        - m7a.xlarge
+      ebs_size: "1.1x"
+      ebs_optimized: True
+      spot_instance: False
+      run_name: run_mosdepth_cram
+      behavior_on_capacity_limit: wait_and_retry
+
+  ## Workflow definition #####################
+  ############################################
+  parse-qc_BAM_Samtools_Mosdepth:
+
+    ## Specific arguments ##############
+    ####################################
+    input:
+
+      # File arguments
+      input_file_bam:
+        argument_type: file.cram
+        source_argument_name: input_files_cram
+        input_dimension: 1
+        mount: True
+        # this file is actually not used by the code but is needed
+        #   to specify where the quality metrics object need to be linked
+
+      SAMTOOLS_stats_OUTPUT:
+        argument_type: file.txt
+        source: samtools_stats_cram
+        source_argument_name: output_file_txt
+
+      MOSDEPTH_SUMMARY:
+        argument_type: file.txt
+        source: mosdepth_cram
+        source_argument_name: output_summary_txt
+
+      MOSDEPTH_OUTPUT:
+        argument_type: file.txt
+        source: mosdepth_cram
+        source_argument_name: output_file_txt
+
+    ## Output ##########################
+    ####################################
+    output:
+
+      # File output
+      qc_values_json:
+        description: QC output JSON
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+      metrics_zip:
+        description: QC compressed output
+        data_category:
+          - Quality Control
+        data_type:
+          - Statistics
+
+    ## EC2 Configuration to use ########
+    ####################################
+    config:
+      instance_type:
+        - t3.small
+      ebs_size: 10
+      ebs_optimized: True
+      spot_instance: True
+      run_name: run_parse-qc_BAM_Samtools_Mosdepth
+      behavior_on_capacity_limit: wait_and_retry

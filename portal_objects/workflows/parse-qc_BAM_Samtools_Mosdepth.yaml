@@ -1,0 +1,56 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: parse-qc_BAM_Samtools_Mosdepth
+description: Run parse-qc to generate quality metrics for samtools stats and mosdepth outputs
+
+runner:
+  language: cwl
+  main: parse-qc_BAM_Samtools_Mosdepth.cwl
+
+software:
+  - qc-parser@in_dev
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+    # this file is actually not used by the code but is needed
+    #   to specify where the quality metrics object need to be linked
+
+  # Files to load
+  SAMTOOLS_stats_OUTPUT:
+    argument_type: file.txt
+
+  MOSDEPTH_SUMMARY:
+    argument_type: file.txt
+
+  MOSDEPTH_OUTPUT:
+    argument_type: file.txt
+
+  # Optional QC ruleset arguments
+  qc_ruleset:
+    argument_type: qc_ruleset.object
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # QC output
+  qc_values_json:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    json: True
+
+  metrics_zip:
+    argument_type: qc
+    argument_to_be_attached_to: input_file_bam
+    zipped: True

@@ -1,0 +1,43 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: mosdepth_cram
+description: Run mosdepth to calculate coverage for input file in CRAM format
+
+runner:
+  language: cwl
+  main: mosdepth_cram.cwl
+
+software:
+  - mosdepth@v0.3.9
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_cram:
+    argument_type: file.cram
+
+  genome_reference_fasta:
+    argument_type: file.fa
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt
+
+  output_summary_txt:
+    argument_type: file.txt
