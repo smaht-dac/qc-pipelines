@@ -1,13 +1,10 @@
 #!/usr/bin/env cwl-runner
 
 cwlVersion: v1.0
-
 class: CommandLineTool
 
 requirements:
   - class: InlineJavascriptRequirement
-
-hints:
   - class: DockerRequirement
     dockerPull: ACCOUNT/mosdepth:VERSION
 
@@ -17,21 +14,21 @@ inputs:
   - id: input_file_bam
     type: File
     inputBinding:
-      position: 1
+      prefix: -i
     doc: Input file in BAM format
 
   - id: nthreads
     type: int
     default: 4
     inputBinding:
-      position: 2
+      prefix: -t
     doc: Number of threads to use [4]
 
   - id: output_prefix
     type: string
-    default: "outfile"
+    default: "output"
     inputBinding:
-      position: 3
+      prefix: -o
 
 outputs:
   - id: output_summary_txt
