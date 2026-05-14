@@ -26,7 +26,7 @@ inputs:
 
   - id: output_prefix
     type: string
-    default: "output"
+    default: "outfile"
     inputBinding:
       prefix: -o
 

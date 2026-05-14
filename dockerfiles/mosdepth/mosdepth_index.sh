@@ -15,7 +15,7 @@ EOF
 
 # Defaults
 INPUT_BAM=""
-OUTPUT_PREFIX="output"
+OUTPUT_PREFIX="outfile"
 NTHREADS="$(nproc)"
 
 ## Command line arguments
