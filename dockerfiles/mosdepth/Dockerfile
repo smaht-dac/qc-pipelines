@@ -33,4 +33,31 @@ ENV LC_ALL=en_US.UTF-8
 RUN wget https://github.com/brentp/mosdepth/releases/download/v0.3.9/mosdepth
 RUN chmod +x mosdepth
 
+## Samtools install
+RUN wget https://github.com/samtools/samtools/releases/download/1.17/samtools-1.17.tar.bz2 && \
+    tar -xjf samtools-1.17.tar.bz2 && \
+    rm -rf samtools-1.17.tar.bz2
+
+WORKDIR /usr/local/bin/samtools-1.17
+
+RUN ./configure && \
+    make
+
+WORKDIR /usr/local/bin/
+
+RUN ln -s samtools-1.17 samtools
+
+#######################################################################
+#     Scripts
+#######################################################################
+## mosdepth_index
+COPY mosdepth_index.sh .
+RUN chmod +x mosdepth_index.sh
+
+#######################################################################
+#     Updating env
+#######################################################################
+ENV PATH=/usr/local/bin/samtools/:$PATH
+
+
 CMD ["bash"]

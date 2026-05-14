@@ -76,7 +76,7 @@ workflows:
 
   ## Workflow definition #####################
   ############################################
-  mosdepth:
+  mosdepth_index:
 
     ## Specific arguments ##############
     ####################################
@@ -125,7 +125,7 @@ workflows:
       ebs_size: "1.1x"
       ebs_optimized: True
       spot_instance: False
-      run_name: run_mosdepth
+      run_name: run_mosdepth_index
       behavior_on_capacity_limit: wait_and_retry
 
   ## Workflow definition #####################
@@ -152,12 +152,12 @@ workflows:
 
       MOSDEPTH_SUMMARY:
         argument_type: file.txt
-        source: mosdepth
+        source: mosdepth_index
         source_argument_name: output_summary_txt
 
       MOSDEPTH_OUTPUT:
         argument_type: file.txt
-        source: mosdepth
+        source: mosdepth_index
         source_argument_name: output_file_txt
 
     ## Output ##########################
