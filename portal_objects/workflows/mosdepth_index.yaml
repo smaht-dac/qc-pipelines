@@ -1,0 +1,40 @@
+## Workflow information #####################################
+#     General information for the workflow
+#############################################################
+name: mosdepth_index
+description: Index the input BAM file and run mosdepth to calculate coverage
+
+runner:
+  language: cwl
+  main: mosdepth_index.cwl
+
+software:
+  - mosdepth@v0.3.9
+
+category:
+  - Quality Control
+
+## Input information ########################################
+#     Input files and parameters
+#############################################################
+input:
+
+  # Required file arguments
+  input_file_bam:
+    argument_type: file.bam
+
+  # Optional parameter arguments
+  nthreads:
+    argument_type: parameter.integer
+
+## Output information #######################################
+#     Output files and quality controls
+#############################################################
+output:
+
+  # File output
+  output_file_txt:
+    argument_type: file.txt
+
+  output_summary_txt:
+    argument_type: file.txt
