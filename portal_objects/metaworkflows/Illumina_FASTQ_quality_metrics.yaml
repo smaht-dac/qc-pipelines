@@ -83,7 +83,9 @@ workflows:
     ####################################
     config:
       instance_type:
-        - t3.small
+        - c7a.medium
+        - c8a.medium
+        - m7a.medium
       ebs_size: '1.1x'
       ebs_optimized: True
       spot_instance: True
@@ -121,7 +123,9 @@ workflows:
     ####################################
     config:
       instance_type:
-        - t3.small
+        - c7a.medium
+        - c8a.medium
+        - m7a.medium
       ebs_size: '1.1x'
       ebs_optimized: True
       spot_instance: True
@@ -180,7 +184,9 @@ workflows:
     ####################################
     config:
       instance_type:
-        - t3.large
+        - m5a.large
+        - m6a.large
+        - m6i.large
       ebs_size: '1.1x'
       ebs_optimized: True
       spot_instance: True
@@ -307,9 +313,11 @@ workflows:
     ####################################
     config:
       instance_type:
-        - t3.small
+        - c7a.medium
+        - c8a.medium
+        - m7a.medium
       ebs_size: 10
       ebs_optimized: True
-      spot_instance: True
+      spot_instance: False
       run_name: run_parse-qc_FASTQ_Quality_Metrics_short_reads
       behavior_on_capacity_limit: wait_and_retry
