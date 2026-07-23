@@ -94,7 +94,9 @@ workflows:
     ####################################
     config:
       instance_type:
-        - t3.large
+        - m5a.large
+        - m6a.large
+        - m6i.large
       ebs_size: '1.1x'
       ebs_optimized: True
       spot_instance: True
