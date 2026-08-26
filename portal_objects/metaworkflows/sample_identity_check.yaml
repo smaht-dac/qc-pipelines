@@ -48,9 +48,10 @@ input:
 workflows:
 
   ## Workflow definition #####################
-  #   ReplaceReadGroups
+  #   ReplaceReadGroups_somalier_extract replaces the read groups
+  #     and extracts the genotype information
   ############################################
-  ReplaceReadGroups:
+  ReplaceReadGroups_somalier_extract:
 
     ## Specific arguments ##############
     ####################################
@@ -65,66 +66,14 @@ workflows:
       genome_reference_fasta:
         argument_type: file.fa
 
+      variant_sites:
+        argument_type: file.vcf_gz
+
       # Parameter arguments
       sample_name:
         argument_type: parameter.string
         source_argument_name: sample_names
         input_dimension: 1
-
-    ## Output ##########################
-    #     Output files for the workflow
-    ####################################
-    output:
-
-      # File output
-      output_file_bam:
-        description: ReplaceReadGroups output BAM
-        data_category:
-          - Sequencing Reads
-        data_type:
-          - Aligned Reads
-        s3_lifecycle_category: no_storage
-
-    ## EC2 Configuration to use ########
-    ####################################
-    config:
-      instance_type:
-        - c5.xlarge
-        - c5a.xlarge
-        - m5.xlarge
-        - m5a.xlarge
-        - m6i.xlarge
-        - m6a.xlarge
-        - m7i.xlarge
-        - m7a.xlarge
-      ebs_size: "8x"
-      ebs_optimized: True
-      spot_instance: True
-      run_name: run_ReplaceReadGroups
-      behavior_on_capacity_limit: wait_and_retry
-
-  ## Workflow definition #####################
-  ############################################
-  somalier_extract:
-
-    ## Specific arguments ##############
-    ####################################
-    input:
-
-      # File arguments
-      input_file_bam:
-        argument_type: file.bam
-        source: ReplaceReadGroups
-        source_argument_name: output_file_bam
-        # Only need to extract a subset of reads
-        # at variant sites
-        mount: True
-
-      genome_reference_fasta:
-        argument_type: file.fa
-
-      variant_sites:
-        argument_type: file.vcf_gz
 
     ## Output ##########################
     ####################################
@@ -142,13 +91,18 @@ workflows:
     ####################################
     config:
       instance_type:
+        - c5.xlarge
+        - c5a.xlarge
+        - m5.xlarge
         - m5a.xlarge
-        - m6a.xlarge
         - m6i.xlarge
-      ebs_size: '1.1x'
+        - m6a.xlarge
+        - m7i.xlarge
+        - m7a.xlarge
+      ebs_size: "3x"
       ebs_optimized: True
       spot_instance: True
-      run_name: run_somalier_extract
+      run_name: run_ReplaceReadGroups_somalier_extract
       behavior_on_capacity_limit: wait_and_retry
 
   ## Workflow definition #####################
@@ -162,7 +116,7 @@ workflows:
       # File arguments
       input_files_somalier:
         argument_type: file.somalier
-        source: somalier_extract
+        source: ReplaceReadGroups_somalier_extract
         source_argument_name: output_file_somalier
         gather: 1
 

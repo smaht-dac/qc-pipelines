@@ -1,14 +1,16 @@
 ## Workflow information #####################################
 #     General information for the workflow
 #############################################################
-name: somalier_extract
-description: Run Somalier extract function on input file in BAM format
+name: ReplaceReadGroups_somalier_extract
+description: Replace the sample name across the @RG definitions of the input file in BAM format. |
+             Run Somalier extract function on the reheadered file
 
 runner:
   language: cwl
-  main: somalier_extract.cwl
+  main: ReplaceReadGroups_somalier_extract.cwl
 
 software:
+  - Samtools@1.17
   - Somalier@v0.2.19
 
 category:
@@ -28,6 +30,10 @@ input:
 
   genome_reference_fasta:
     argument_type: file.fa
+
+  # Required parameter arguments
+  sample_name:
+    argument_type: parameter.string
 
 ## Output information #######################################
 #     Output files and quality controls
