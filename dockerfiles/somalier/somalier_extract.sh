@@ -12,7 +12,7 @@ set -euo pipefail
 # on exit, so the .somalier file is the sole output.
 #
 # CRAM input is supported and is kept in CRAM, samtools reheader and somalier
-# both read it directly, so converting to BAM would only cost an extra copy.
+# both read it directly.
 #
 # Requires: samtools, somalier
 ################################################################################
