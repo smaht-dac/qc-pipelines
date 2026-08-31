@@ -7,13 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **qc-pipelines** is a collection of quality control (QC) pipeline components for genomic data analysis. It is part of the SMaHT Data Analysis Center (smaht-dac) initiative and provides standardized workflows for analyzing sequencing data across multiple modalities (short reads, long reads, RNA-seq).
 
 **Repository**: https://github.com/smaht-dac/qc-pipelines  
-**Key Maintainers**: Michele Berselli, Dominika Maziec
 
 ## Architecture
 
 The repository is organized into four main components:
 
-### 1. **Descriptions** (`descriptions/` - 36 CWL files)
+### 1. **Descriptions** (`descriptions/`)
 Individual Command Line Tool (CWL v1.0) definitions for specific QC operations. These are atomic, reusable tools that wrap external bioinformatics software and custom scripts. Each tool:
 - Runs a single command or Python script
 - Defines inputs (files, parameters), outputs, and Docker requirements
@@ -21,9 +20,9 @@ Individual Command Line Tool (CWL v1.0) definitions for specific QC operations. 
 
 **Key tool categories**:
 - **Alignment QC**: samtools (stats, flagstat, idxstats, subsample), Picard tools (CollectAlignmentSummaryMetrics, CollectInsertSizeMetrics, CollectWgsMetrics, etc.)
-- **Sequence QC**: FastQC, NanoPlot, Kraken2
+- **Sequence QC**: FastQC, NanoPlot
 - **Coverage**: mosdepth
-- **Contamination/Identity**: VerifyBamID2, Somalier (extract, relate)
+- **Contamination/Identity**: VerifyBamID2, Somalier (extract, relate), Kraken2
 - **RNA-seq**: RNA-SeQC metrics collection, tissue classifier prediction
 - **Parsing**: parse-qc tools that aggregate metrics from multiple tools into standardized JSON format
 
